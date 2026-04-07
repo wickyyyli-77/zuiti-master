@@ -3,99 +3,157 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>嘴替大师 | 职场高情商话术生成</title>
-  <meta name="description" content="把心里想说的话，翻译成职场高情商版本。支持话术翻译、截图解读、回复助手，职场打工人必备工具。">
+  <title>职场嘴替 | 想到了，也能说到位</title>
+  <meta name="description" content="帮你把想法说清楚、说到位。支持表达转化、回复参考、截图解读，职场沟通效率工具。">
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     :root {
-      --coral: #FF6B6B;
-      --orange: #FF8E53;
-      --cream: #FFF8F0;
-      --warm-white: #FFFBF5;
-      --soft-orange: #FFE4CC;
-      --peach: #FFAD8A;
-      --text-dark: #3D2314;
-      --text-mid: #7A5544;
-      --text-light: #B8917F;
+      --accent: #F55F3E;
+      --accent-light: #FF8565;
+      --accent-ultra: #FFF0EC;
+      --bg: #F7F6F4;
+      --surface: #FFFFFF;
+      --border: #EBEBEA;
+      --border-hover: #D4D2CF;
+      --text-dark: #1A1A18;
+      --text-mid: #5C5B57;
+      --text-light: #9C9A95;
+      --v1-accent: #2E7D6E;
+      --v2-accent: #1D5FA8;
+      --v3-accent: #6A3EC2;
     }
     * { box-sizing: border-box; }
     body {
-      background: linear-gradient(135deg, #FFF8F0 0%, #FFE4CC 50%, #FFDDD0 100%);
+      background: var(--bg);
       min-height: 100vh;
       font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", "Hiragino Sans GB", sans-serif;
       color: var(--text-dark);
     }
-    .gradient-text {
-      background: linear-gradient(135deg, #FF6B6B, #FF8E53);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+
+    /* Header */
+    .hero-header {
+      background: linear-gradient(160deg, #1A1A18 0%, #2E2A24 100%);
+      border-radius: 0 0 28px 28px;
+      padding: 36px 24px 32px;
+      margin-bottom: 20px;
+      position: relative;
+      overflow: hidden;
     }
+    .hero-header::before {
+      content: '';
+      position: absolute;
+      top: -40px; right: -40px;
+      width: 200px; height: 200px;
+      background: radial-gradient(circle, rgba(245,95,62,0.18) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+    .hero-header::after {
+      content: '';
+      position: absolute;
+      bottom: -20px; left: 30px;
+      width: 120px; height: 120px;
+      background: radial-gradient(circle, rgba(245,95,62,0.10) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+    .hero-logo { font-size: 40px; display: block; margin-bottom: 12px; position: relative; z-index: 1; }
+    .hero-title {
+      font-size: 28px; font-weight: 900; color: #FFFFFF;
+      letter-spacing: -0.5px; line-height: 1.1;
+      position: relative; z-index: 1;
+    }
+    .hero-title span {
+      background: linear-gradient(90deg, #F55F3E, #FF9A6C);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .hero-slogan {
+      font-size: 14px; color: rgba(255,255,255,0.55);
+      margin-top: 8px; position: relative; z-index: 1;
+      font-weight: 400; letter-spacing: 0.2px;
+    }
+    @keyframes fadeInSlogan {
+      from { opacity: 0; transform: translateY(4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    #sloganText { animation: fadeInSlogan 0.6s ease; }
+
+    /* Cards */
+    .card {
+      background: var(--surface);
+      border-radius: 16px;
+      padding: 20px;
+      border: 1px solid var(--border);
+      box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+    }
+
+    /* Version cards — left accent bar style */
+    .version-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 18px 18px 18px 22px;
+      position: relative;
+      overflow: hidden;
+    }
+    .version-card::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 4px;
+      border-radius: 4px 0 0 4px;
+    }
+    .version-card-1::before { background: var(--v1-accent); }
+    .version-card-2::before { background: var(--v2-accent); }
+    .version-card-3::before { background: var(--v3-accent); }
+
+    .version-label { font-size: 11px; font-weight: 700; letter-spacing: 0.8px; text-transform: uppercase; margin-bottom: 6px; }
+    .version-card-1 .version-label { color: var(--v1-accent); }
+    .version-card-2 .version-label { color: var(--v2-accent); }
+    .version-card-3 .version-label { color: var(--v3-accent); }
+
+    /* Tag pills */
     .tag-pill {
       display: inline-block;
-      padding: 6px 14px;
+      padding: 5px 12px;
       border-radius: 999px;
-      background: white;
-      border: 1.5px solid #FFD6BB;
+      background: var(--surface);
+      border: 1px solid var(--border);
       color: var(--text-mid);
       font-size: 13px;
       cursor: pointer;
-      transition: all 0.2s;
+      transition: all 0.18s;
       white-space: nowrap;
       user-select: none;
     }
     .tag-pill:hover {
-      background: linear-gradient(135deg, #FF6B6B, #FF8E53);
+      background: var(--accent);
       color: white;
-      border-color: transparent;
+      border-color: var(--accent);
       transform: translateY(-1px);
-      box-shadow: 0 4px 12px rgba(255, 107, 107, 0.3);
+      box-shadow: 0 3px 10px rgba(245,95,62,0.28);
     }
     .tag-pill:active { transform: translateY(0); }
-    .card {
-      background: white;
-      border-radius: 20px;
-      padding: 24px;
-      box-shadow: 0 4px 24px rgba(255, 142, 83, 0.12);
-      border: 1px solid rgba(255, 214, 187, 0.5);
-    }
-    .version-card-1 {
-      background: linear-gradient(135deg, #FFF8F0, #FFE4CC);
-      border: 1.5px solid #FFD6BB;
-      border-radius: 16px;
-      padding: 20px;
-    }
-    .version-card-2 {
-      background: linear-gradient(135deg, #FFF0F0, #FFD6CC);
-      border: 1.5px solid #FFAD8A;
-      border-radius: 16px;
-      padding: 20px;
-    }
-    .version-card-3 {
-      background: linear-gradient(135deg, #2D1B69, #4A2080);
-      border-radius: 16px;
-      padding: 20px;
-      color: white;
-    }
+
+    /* Buttons */
     .btn-primary {
-      background: linear-gradient(135deg, #FF6B6B, #FF8E53);
+      background: var(--accent);
       color: white;
       border: none;
       border-radius: 12px;
       padding: 14px 32px;
       font-size: 16px;
-      font-weight: 600;
+      font-weight: 700;
       cursor: pointer;
       transition: all 0.2s;
-      box-shadow: 0 4px 16px rgba(255, 107, 107, 0.35);
+      box-shadow: 0 3px 12px rgba(245,95,62,0.30);
+      letter-spacing: 0.2px;
     }
-    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(255, 107, 107, 0.45); }
+    .btn-primary:hover { background: #E04E2E; transform: translateY(-1px); box-shadow: 0 5px 16px rgba(245,95,62,0.38); }
     .btn-primary:active { transform: translateY(0); }
-    .btn-primary:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+    .btn-primary:disabled { opacity: 0.55; cursor: not-allowed; transform: none; box-shadow: none; }
     .btn-secondary {
-      background: white;
+      background: var(--surface);
       color: var(--text-mid);
-      border: 2px solid #FFD6BB;
+      border: 1.5px solid var(--border);
       border-radius: 12px;
       padding: 14px 32px;
       font-size: 16px;
@@ -103,433 +161,673 @@
       cursor: pointer;
       transition: all 0.2s;
     }
-    .btn-secondary:hover { border-color: #FF8E53; color: #FF6B6B; }
-    .btn-secondary:disabled { opacity: 0.6; cursor: not-allowed; }
+    .btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
+    .btn-secondary:disabled { opacity: 0.55; cursor: not-allowed; }
     .btn-copy {
       display: inline-flex;
       align-items: center;
       gap: 4px;
-      padding: 6px 14px;
-      border-radius: 8px;
-      border: 1.5px solid currentColor;
+      padding: 5px 12px;
+      border-radius: 7px;
+      border: 1px solid var(--border);
       font-size: 12px;
       cursor: pointer;
-      transition: all 0.2s;
-      background: transparent;
+      transition: all 0.18s;
+      background: var(--bg);
+      color: var(--text-mid);
       font-weight: 600;
     }
-    .btn-copy:hover { opacity: 0.75; }
+    .btn-copy:hover { border-color: var(--accent); color: var(--accent); }
     @keyframes shake {
       0%,100%{transform:translateX(0)} 20%{transform:translateX(-4px)} 40%{transform:translateX(4px)} 60%{transform:translateX(-3px)} 80%{transform:translateX(3px)}
     }
     .btn-copy.copied { animation: shake 0.4s ease; }
+
+    /* Input */
     .input-area {
       width: 100%;
-      border: 2px solid #FFD6BB;
-      border-radius: 16px;
-      padding: 16px;
+      border: 1.5px solid var(--border);
+      border-radius: 12px;
+      padding: 14px 16px;
       font-size: 15px;
       color: var(--text-dark);
-      background: white;
+      background: var(--bg);
       resize: none;
       outline: none;
-      transition: border-color 0.2s;
+      transition: border-color 0.2s, background 0.2s;
       font-family: inherit;
+      line-height: 1.6;
     }
-    .input-area:focus { border-color: #FF8E53; }
-    .input-area::placeholder { color: #C4A090; }
+    .input-area:focus { border-color: var(--accent); background: white; }
+    .input-area::placeholder { color: var(--text-light); }
+
+    /* Select */
     select.custom-select {
-      border: 2px solid #FFD6BB;
-      border-radius: 12px;
-      padding: 10px 16px;
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
+      padding: 9px 34px 9px 14px;
       font-size: 14px;
       color: var(--text-dark);
-      background: white;
+      background: var(--bg);
       outline: none;
       cursor: pointer;
       transition: border-color 0.2s;
       appearance: none;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23B8917F' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%239C9A95' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
       background-repeat: no-repeat;
       background-position: right 12px center;
-      padding-right: 36px;
+      background-color: var(--bg);
     }
-    select.custom-select:focus { border-color: #FF8E53; }
-    .result-section { animation: slideUp 0.4s ease; }
+    select.custom-select:focus { border-color: var(--accent); }
+
+    /* Animations */
+    .result-section { animation: slideUp 0.35s ease; }
     @keyframes slideUp {
-      from { opacity: 0; transform: translateY(16px); }
+      from { opacity: 0; transform: translateY(12px); }
       to { opacity: 1; transform: translateY(0); }
     }
+
+    /* Badge */
     .badge {
       display: inline-block;
-      padding: 2px 10px;
+      padding: 2px 8px;
       border-radius: 999px;
       font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.5px;
+      font-weight: 600;
     }
-    .scenarios-wrap { display: flex; flex-wrap: wrap; gap: 8px; }
+
+    /* Scenarios */
+    .scenarios-wrap { display: flex; flex-wrap: wrap; gap: 7px; }
     @media (max-width: 640px) {
       .scenarios-wrap { flex-wrap: nowrap; overflow-x: auto; padding-bottom: 4px; }
       .scenarios-wrap::-webkit-scrollbar { height: 3px; }
+      .scenarios-wrap::-webkit-scrollbar-thumb { background: var(--border); border-radius: 999px; }
     }
+
+    /* Loading */
     .loading-dots::after { content: ''; animation: dots 1.5s steps(4, end) infinite; }
     @keyframes dots {
       0%{content:''} 25%{content:'.'} 50%{content:'..'} 75%{content:'...'} 100%{content:''}
     }
-    ::-webkit-scrollbar { width: 6px; }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar { width: 5px; }
     ::-webkit-scrollbar-track { background: transparent; }
-    ::-webkit-scrollbar-thumb { background: #FFD6BB; border-radius: 999px; }
+    ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 999px; }
+
+    /* Mobile-only visibility */
+    .mobile-only { display: block; }
+    @media (min-width: 900px) {
+      .mobile-only { display: none !important; }
+      /* Left inner: remove default max-w centering on PC */
+      .pc-left-inner { max-width: none !important; margin: 0 !important; padding-left: 0 !important; padding-right: 0 !important; }
+      /* Hide result blocks in left panel on PC — they move to right */
+      .pc-result-block { display: none !important; }
+      /* PC footer bar */
+      .pc-footer-bar { background: #1A1A18; padding: 14px 48px; border-top: 1px solid rgba(255,255,255,0.05); text-align:center; }
+    }
+    @media (max-width: 899px) {
+      .pc-footer-bar { display: none; }
+      /* Show result blocks inline on mobile */
+      .pc-result-block { display: block !important; }
+    }
+
+    /* ── PC Two-column layout ── */
+    @media (min-width: 900px) {
+      body { background: var(--bg); }
+
+      .pc-shell {
+        display: flex;
+        min-height: 100vh;
+        flex-direction: column;
+      }
+
+      .pc-topbar {
+        background: linear-gradient(160deg, #1A1A18 0%, #2E2A24 100%);
+        padding: 0 48px;
+        display: flex;
+        align-items: center;
+        height: 64px;
+        gap: 20px;
+        border-bottom: 1px solid rgba(255,255,255,0.06);
+        position: sticky;
+        top: 0;
+        z-index: 100;
+      }
+      .pc-topbar-logo { font-size: 22px; font-weight: 900; color: white; display: flex; align-items: center; gap: 8px; letter-spacing: -0.3px; }
+      .pc-topbar-logo span { background: linear-gradient(90deg,#F55F3E,#FF9A6C); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+      .pc-topbar-slogan { font-size: 13px; color: rgba(255,255,255,0.4); }
+      .pc-topbar-spacer { flex: 1; }
+      .pc-topbar-badge { font-size: 11px; padding: 4px 10px; border-radius: 999px; background: rgba(245,95,62,0.15); color: #FF8565; border: 1px solid rgba(245,95,62,0.25); font-weight: 600; }
+
+      .pc-main {
+        flex: 1;
+        display: flex;
+        max-width: 1280px;
+        margin: 0 auto;
+        width: 100%;
+        padding: 32px 48px;
+        gap: 28px;
+        align-items: flex-start;
+      }
+
+      .pc-left {
+        width: 420px;
+        flex-shrink: 0;
+        position: sticky;
+        top: 88px;
+      }
+
+      .pc-right {
+        flex: 1;
+        min-width: 0;
+      }
+
+      /* Hide mobile-only elements on PC */
+      .hero-header { display: none; }
+      .mobile-banner-wrap { display: none; }
+      .pc-hide { display: none; }
+
+      /* Tab bar on PC — horizontal pill under left panel */
+      .tab-bar {
+        margin-bottom: 16px;
+      }
+
+      /* Result section full width on right */
+      #translateResult, #replyResult, #screenshotResult {
+        /* no max-width constraint */
+      }
+
+      /* Version cards side-by-side on PC right panel */
+      .pc-results-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 14px;
+      }
+      .pc-results-grid .version-card { margin-bottom: 0 !important; }
+
+      /* Reply cards side by side too */
+      .pc-reply-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 14px;
+      }
+      .pc-reply-grid .version-card { margin-bottom: 0 !important; }
+
+      /* Insight blocks 2-col on PC */
+      .pc-insight-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+        margin-bottom: 12px;
+      }
+      .pc-insight-grid .insight-block { margin-bottom: 0; }
+    }
+
+    @media (max-width: 899px) {
+      .pc-topbar { display: none; }
+      .pc-shell { display: block; }
+      .pc-main { display: block; padding: 0; }
+      .pc-left, .pc-right { width: 100%; position: static; }
+      .pc-results-grid, .pc-reply-grid, .pc-insight-grid { display: block; }
+    }
+
+    /* Collapse */
     .collapse-btn { display: flex; align-items: center; justify-content: space-between; cursor: pointer; user-select: none; }
-    .collapse-arrow { transition: transform 0.2s; font-size: 12px; color: var(--text-light); }
+    .collapse-arrow { transition: transform 0.2s; font-size: 11px; color: var(--text-light); }
     .collapse-arrow.open { transform: rotate(180deg); }
     .collapse-content { overflow: hidden; transition: max-height 0.35s ease; max-height: 0; }
     .collapse-content.open { max-height: 600px; }
-    .tab-bar { display: flex; gap: 0; background: #FFF0E6; border-radius: 14px; padding: 4px; margin-bottom: 20px; }
+
+    /* Tab bar */
+    .tab-bar { display: flex; gap: 0; background: var(--surface); border-radius: 12px; padding: 3px; margin-bottom: 16px; border: 1px solid var(--border); }
     .tab-item {
-      flex: 1; text-align: center; padding: 10px 8px; border-radius: 10px;
-      font-size: 14px; font-weight: 600; cursor: pointer; transition: all 0.2s;
-      color: var(--text-mid); user-select: none;
+      flex: 1; text-align: center; padding: 9px 8px; border-radius: 9px;
+      font-size: 13px; font-weight: 600; cursor: pointer; transition: all 0.2s;
+      color: var(--text-light); user-select: none;
     }
-    .tab-item.active { background: white; color: #FF6B6B; box-shadow: 0 2px 8px rgba(255,107,107,0.15); }
+    .tab-item.active { background: var(--accent); color: white; box-shadow: 0 2px 8px rgba(245,95,62,0.30); }
+
+    /* Upload */
     .upload-zone {
-      border: 2px dashed #FFD6BB; border-radius: 16px; padding: 32px 16px;
-      text-align: center; cursor: pointer; transition: all 0.2s; background: #FFFBF8; position: relative;
+      border: 1.5px dashed var(--border); border-radius: 14px; padding: 28px 16px;
+      text-align: center; cursor: pointer; transition: all 0.2s; background: var(--bg); position: relative;
     }
-    .upload-zone:hover { border-color: #FF8E53; background: #FFF8F0; }
-    .upload-zone.has-image { border-style: solid; border-color: #FFAD8A; padding: 12px; }
+    .upload-zone:hover { border-color: var(--accent); background: var(--accent-ultra); }
+    .upload-zone.has-image { border-style: solid; border-color: var(--border-hover); padding: 12px; }
     .upload-zone input[type=file] { position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%; }
-    .preview-img { max-height: 200px; max-width: 100%; border-radius: 12px; object-fit: contain; display: block; margin: 0 auto; }
-    .insight-block { background: linear-gradient(135deg, #FFF8F0, #FFE4CC); border: 1.5px solid #FFD6BB; border-radius: 16px; padding: 20px; margin-bottom: 12px; }
-    .insight-block-dark { background: linear-gradient(135deg, #2D1B69, #4A2080); border-radius: 16px; padding: 20px; color: white; margin-bottom: 12px; }
+    .preview-img { max-height: 200px; max-width: 100%; border-radius: 10px; object-fit: contain; display: block; margin: 0 auto; }
+
+    /* Insight blocks */
+    .insight-block { background: var(--bg); border: 1px solid var(--border); border-radius: 14px; padding: 18px; margin-bottom: 10px; }
+    .insight-block-accent { background: linear-gradient(135deg, #1A1A18, #2E2A24); border-radius: 14px; padding: 18px; color: white; margin-bottom: 10px; }
+
     /* API Banner */
     #apiBanner {
-      background: linear-gradient(135deg, #FF6B6B, #FF8E53);
-      border-radius: 16px; padding: 14px 18px; margin-bottom: 16px;
+      background: linear-gradient(135deg, #1A1A18, #2E2A24);
+      border-radius: 14px; padding: 12px 16px; margin-bottom: 14px;
       display: flex; align-items: center; justify-content: space-between; gap: 10px;
-      box-shadow: 0 4px 16px rgba(255,107,107,0.25);
+      border: 1px solid rgba(255,255,255,0.08);
     }
     #apiBanner.hidden { display: none; }
-    .api-config-input {
-      border: 1.5px solid #FFD6BB; border-radius: 8px; padding: 8px 12px; font-size: 13px;
-      outline: none; width: 100%; background: white; color: var(--text-dark); font-family: monospace;
-    }
-    .api-config-input:focus { border-color: #FF8E53; }
-    /* 历史记录 */
+
+    /* History */
     .history-item {
-      background: #FFFBF8; border: 1.5px solid #FFE4CC; border-radius: 12px;
+      background: var(--surface); border: 1px solid var(--border); border-radius: 10px;
       padding: 12px 14px; cursor: pointer; transition: all 0.15s;
     }
-    .history-item:hover { border-color: #FFAD8A; background: #FFF8F0; }
-    /* 对比展示 */
-    .compare-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .history-item:hover { border-color: var(--border-hover); box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+
+    /* Compare */
+    .compare-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
     @media(max-width:480px){ .compare-wrap { grid-template-columns: 1fr; } }
-    .compare-before { background: #F5F5F5; border-radius: 12px; padding: 14px; border: 1.5px solid #E0E0E0; }
-    .compare-after { background: linear-gradient(135deg, #FFF8F0, #FFE4CC); border-radius: 12px; padding: 14px; border: 1.5px solid #FFD6BB; }
+    .compare-before { background: var(--bg); border-radius: 10px; padding: 14px; border: 1px solid var(--border); }
+    .compare-after { background: var(--accent-ultra); border-radius: 10px; padding: 14px; border: 1px solid rgba(245,95,62,0.2); }
+
+    /* Section label */
+    .section-label { font-size: 12px; font-weight: 600; color: var(--text-light); letter-spacing: 0.4px; margin-bottom: 10px; }
   </style>
 </head>
 <body>
 
-  <!-- AI已就位 Banner（仅首次访问显示） -->
-  <div id="apiBanner">
-    <div style="flex:1">
-      <p class="text-white font-bold text-sm mb-0.5">⚡ 工蜂AI已就位，直接开用！</p>
-      <p class="text-white text-xs opacity-80">Powered by 工蜂AI · 无需配置任何 Key</p>
-    </div>
-    <button onclick="dismissBanner()" style="background:transparent;border:none;color:white;opacity:0.7;cursor:pointer;font-size:18px;padding:0 4px;">✕</button>
+  <div class="pc-shell">
+
+  <!-- ══ PC Top Bar (hidden on mobile) ══ -->
+  <div class="pc-topbar">
+    <div class="pc-topbar-logo">🫢 职场<span>嘴替</span></div>
+    <div class="pc-topbar-slogan">有想法不等于会表达，我来补这一步</div>
+    <div class="pc-topbar-spacer"></div>
+    <div class="pc-topbar-badge">⚡ 工蜂AI已就位</div>
   </div>
 
-  <div class="max-w-2xl mx-auto px-4 pt-8 pb-8">
-
-    <!-- Header -->
-    <div class="text-center mb-6">
-      <div class="text-5xl mb-3">🫢</div>
-      <h1 class="text-3xl font-black gradient-text mb-2">职场嘴替</h1>
-      <p class="text-base" style="color: var(--text-mid);">救救嘴笨打工人 · 说出你心里想说的，我翻译成你该说的</p>
-    </div>
-
-    <!-- Tab切换 -->
-    <div class="tab-bar">
-      <div class="tab-item active" id="tab-translate" onclick="switchTab('translate')">🪄 话术翻译</div>
-      <div class="tab-item" id="tab-reply" onclick="switchTab('reply')">💬 回复助手</div>
-      <div class="tab-item" id="tab-screenshot" onclick="switchTab('screenshot')">📸 截图解读</div>
-    </div>
-
-    <!-- ====== 话术翻译 Tab ====== -->
-    <div id="panel-translate">
-      <!-- 快速填入 -->
-      <div class="card mb-4">
-        <p class="text-sm font-semibold mb-3" style="color: var(--text-light);">⚡ 快速填入（点击秒填）</p>
-        <div class="scenarios-wrap">
-          <span class="tag-pill" onclick="fillScenario('这个需求来不及做，但我不知道怎么拒绝')">😤 来不及做</span>
-          <span class="tag-pill" onclick="fillScenario('这个锅不是我的，不要甩给我')">🙅 锅不是我的</span>
-          <span class="tag-pill" onclick="fillScenario('周末被叫来加班，但我不想去')">😡 周末被叫加班</span>
-          <span class="tag-pill" onclick="fillScenario('我想涨薪但不知道怎么开口')">💰 想要涨薪</span>
-          <span class="tag-pill" onclick="fillScenario('我犯了个错误，需要跟领导解释')">😰 搞砸了要解释</span>
-          <span class="tag-pill" onclick="fillScenario('能不能给我加点人手或者资源')">🙏 加点资源</span>
-          <span class="tag-pill" onclick="fillScenario('跨部门协作对方不配合，我要推进但不想撕破脸')">🔗 跨部门协作</span>
-          <span class="tag-pill" onclick="fillScenario('同事抢了我的功劳，但我不好直说')">😠 功劳被抢了</span>
-          <span class="tag-pill" onclick="fillScenario('我想提出离职，但不知道怎么说比较体面')">🚪 体面离职</span>
-          <span class="tag-pill" onclick="fillScenario('甲方一直改需求，我要表达不满但不能得罪客户')">💼 甲方改需求</span>
+  <!-- ══ Mobile Header (hidden on PC) ══ -->
+  <div class="mobile-only">
+    <!-- Banner -->
+    <div class="max-w-2xl mx-auto px-4 pt-4">
+      <div id="apiBanner">
+        <div style="flex:1">
+          <p class="font-bold text-sm mb-0.5" style="color:white;">⚡ 工蜂AI已就位，直接开用！</p>
+          <p class="text-xs" style="color:rgba(255,255,255,0.5);">Powered by 工蜂AI · 无需配置任何 Key</p>
         </div>
-      </div>
-
-      <!-- 输入区 -->
-      <div class="card mb-4">
-        <p class="text-sm font-semibold mb-3" style="color: var(--text-light);">📝 你心里想说的话（不管多直白都行）</p>
-        <textarea id="inputText" class="input-area" rows="4"
-          placeholder="直接说吧，我不评判你～比如：这个需求根本来不及做，但又不能直接拒绝..."></textarea>
-
-        <!-- 可选设置（折叠） -->
-        <div class="mt-4">
-          <div class="collapse-btn" onclick="toggleCollapse('collapseContent','collapseArrow')">
-            <span class="text-xs font-semibold" style="color: var(--text-light);">⚙️ 可选：指定场景/对象（不填也能用）</span>
-            <span class="collapse-arrow" id="collapseArrow">▼</span>
-          </div>
-          <div class="collapse-content" id="collapseContent">
-            <div class="flex gap-3 mt-3 flex-wrap">
-              <div class="flex-1 min-w-36">
-                <label class="block text-xs font-semibold mb-1.5" style="color: var(--text-light);">📍 对话场景</label>
-                <select id="sceneSelect" class="custom-select w-full">
-                  <option value="不限" selected>🔓 不限（AI自判断）</option>
-                  <option value="向上汇报">📊 向上汇报</option>
-                  <option value="拒绝需求">🚫 拒绝需求</option>
-                  <option value="催促跟进">⏰ 催促跟进</option>
-                  <option value="表达不满">😤 表达不满</option>
-                  <option value="提出异议">💡 提出异议</option>
-                  <option value="婉拒邀请">🙅 婉拒邀请</option>
-                  <option value="争取资源">💪 争取资源</option>
-                  <option value="澄清责任">🔍 澄清责任</option>
-                  <option value="社交文案">📱 社交文案</option>
-                </select>
-              </div>
-              <div class="flex-1 min-w-36">
-                <label class="block text-xs font-semibold mb-1.5" style="color: var(--text-light);">👤 说话对象</label>
-                <select id="targetSelect" class="custom-select w-full">
-                  <option value="不限/群聊" selected>👥 不限/群聊</option>
-                  <option value="领导">👔 领导</option>
-                  <option value="平级同事">🤝 平级同事</option>
-                  <option value="下属">👇 下属</option>
-                  <option value="客户">💼 客户</option>
-                  <option value="跨部门同事">🔗 跨部门同事</option>
-                </select>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <button class="btn-primary w-full mt-5" id="translateBtn" onclick="doTranslate()">
-          🪄 帮我说出来！
-        </button>
-        <p class="text-xs text-center mt-2" style="color:var(--text-light);">Ctrl+Enter 快速翻译</p>
-      </div>
-
-      <!-- 翻译结果 -->
-      <div id="translateResult" class="hidden result-section">
-        <div class="mb-3 flex items-center justify-between">
-          <span class="text-base font-black" style="color: var(--text-dark);">✨ 三个版本，随你挑</span>
-          <button onclick="showCompare()" id="compareBtn" class="tag-pill text-xs hidden">🔄 原文对比</button>
-        </div>
-
-        <!-- 对比模式 -->
-        <div id="compareView" class="hidden mb-4">
-          <div class="compare-wrap">
-            <div class="compare-before">
-              <p class="text-xs font-bold mb-2" style="color:#999;">💬 你说的</p>
-              <p id="compareOriginal" class="text-sm leading-relaxed" style="color:#555;white-space:pre-wrap;"></p>
-            </div>
-            <div class="compare-after">
-              <p class="text-xs font-bold mb-2" style="color:var(--text-mid);">✨ AI翻译版</p>
-              <p id="compareTranslated" class="text-sm leading-relaxed" style="color:var(--text-dark);white-space:pre-wrap;"></p>
-            </div>
-          </div>
-          <button onclick="hideCompare()" class="text-xs mt-2" style="color:var(--text-light);background:none;border:none;cursor:pointer;">收起对比 ▲</button>
-        </div>
-
-        <div class="version-card-1 mb-4">
-          <div class="flex items-center justify-between mb-3">
-            <div class="flex items-center gap-2">
-              <span class="text-lg">😊</span>
-              <span class="font-bold text-base" style="color: var(--text-dark);">日常礼貌版</span>
-              <span class="badge" style="background: #FFD6BB; color: #7A5544;">温和不失礼</span>
-            </div>
-            <button class="btn-copy" style="color: var(--text-mid); border-color: #FFAD8A;" onclick="copyText('result1', this)">📋 复制</button>
-          </div>
-          <p id="result1" class="text-sm leading-relaxed" style="color: var(--text-dark); white-space: pre-wrap;">—</p>
-        </div>
-
-        <div class="version-card-2 mb-4">
-          <div class="flex items-center justify-between mb-3">
-            <div class="flex items-center gap-2">
-              <span class="text-lg">💼</span>
-              <span class="font-bold text-base" style="color: var(--text-dark);">正式边界版</span>
-              <span class="badge" style="background: #FFAD8A; color: white;">有礼有节</span>
-            </div>
-            <button class="btn-copy" style="color: var(--text-mid); border-color: #FF8E53;" onclick="copyText('result2', this)">📋 复制</button>
-          </div>
-          <p id="result2" class="text-sm leading-relaxed" style="color: var(--text-dark); white-space: pre-wrap;">—</p>
-        </div>
-
-        <div class="version-card-3 mb-4">
-          <div class="flex items-center justify-between mb-3">
-            <div class="flex items-center gap-2">
-              <span class="text-lg">🚀</span>
-              <span class="font-bold text-base text-white">向上管理版</span>
-              <span class="badge" style="background: rgba(255,255,255,0.2); color: white;">高段位玩法</span>
-            </div>
-            <button class="btn-copy" style="color: rgba(255,255,255,0.8); border-color: rgba(255,255,255,0.4);" onclick="copyText('result3', this)">📋 复制</button>
-          </div>
-          <p id="result3" class="text-sm leading-relaxed text-white opacity-90" style="white-space: pre-wrap;">—</p>
-        </div>
-      </div>
-
-      <!-- 历史记录 -->
-      <div id="historySection" class="hidden">
-        <div class="collapse-btn mb-2" onclick="toggleCollapse('historyList','historyArrow')">
-          <span class="text-sm font-bold" style="color:var(--text-mid);">📚 <span id="historyTitle">最近翻译</span></span>
-          <span class="collapse-arrow" id="historyArrow">▼</span>
-        </div>
-        <div class="collapse-content" id="historyList">
-          <div id="historyItems" class="space-y-2 mt-2"></div>
-          <button onclick="clearHistory()" class="text-xs mt-3" style="color:var(--text-light);background:none;border:none;cursor:pointer;">🗑️ 清空历史</button>
-        </div>
+        <button onclick="dismissBanner()" style="background:transparent;border:none;color:rgba(255,255,255,0.5);cursor:pointer;font-size:18px;padding:0 4px;">✕</button>
       </div>
     </div>
-
-    <!-- ====== 回复助手 Tab ====== -->
-    <div id="panel-reply" class="hidden">
-      <div class="card mb-4">
-        <div class="text-center mb-4">
-          <div class="text-3xl mb-2">💬</div>
-          <p class="font-bold" style="color:var(--text-dark);">收到一条消息，不知道怎么回？</p>
-          <p class="text-sm mt-1" style="color:var(--text-light);">粘贴对方说的话，AI帮你想出高情商的回复</p>
-        </div>
-        <label class="text-xs font-semibold block mb-2" style="color:var(--text-light);">📨 对方说的话（粘贴进来）</label>
-        <textarea id="replyInput" class="input-area" rows="4" placeholder="把对方发给你的消息粘贴在这里...比如：「这个方案你再好好想想，感觉不太对」"></textarea>
-
-        <div class="mt-3">
-          <label class="text-xs font-semibold block mb-2" style="color:var(--text-light);">🎯 对方是谁？（可选）</label>
-          <select id="replyTarget" class="custom-select w-full">
-            <option value="不确定">👥 不确定</option>
-            <option value="我的领导">👔 我的领导</option>
-            <option value="平级同事">🤝 平级同事</option>
-            <option value="我的下属">👇 我的下属</option>
-            <option value="客户/甲方">💼 客户/甲方</option>
-            <option value="跨部门同事">🔗 跨部门同事</option>
-          </select>
-        </div>
-
-        <div class="mt-3">
-          <label class="text-xs font-semibold block mb-2" style="color:var(--text-light);">📝 背景补充（选填）</label>
-          <textarea id="replyContext" class="input-area" rows="2" placeholder="比如：对方最近情绪不太好，这件事我也确实有点没做好..."></textarea>
-        </div>
-
-        <button class="btn-primary w-full mt-4" id="replyBtn" onclick="doReply()">💬 帮我想怎么回！</button>
-      </div>
-
-      <div id="replyResult" class="hidden result-section">
-        <div class="mb-3">
-          <span class="text-base font-black" style="color:var(--text-dark);">🧠 AI解读 + 建议回复</span>
-        </div>
-        <div class="insight-block mb-4">
-          <div class="flex items-center gap-2 mb-2">
-            <span class="text-lg">🎭</span>
-            <span class="font-bold" style="color:var(--text-dark);">对方真实意思</span>
-          </div>
-          <p id="replyMeaning" class="text-sm leading-relaxed" style="color:var(--text-dark);white-space:pre-wrap;">—</p>
-        </div>
-        <div class="version-card-1 mb-3">
-          <div class="flex items-center justify-between mb-2">
-            <div class="flex items-center gap-2"><span>😊</span><span class="font-bold text-sm" style="color:var(--text-dark);">温和回应版</span></div>
-            <button class="btn-copy" style="color:var(--text-mid);border-color:#FFAD8A;" onclick="copyText('reply1',this)">📋 复制</button>
-          </div>
-          <p id="reply1" class="text-sm leading-relaxed" style="color:var(--text-dark);white-space:pre-wrap;">—</p>
-        </div>
-        <div class="version-card-2 mb-3">
-          <div class="flex items-center justify-between mb-2">
-            <div class="flex items-center gap-2"><span>💼</span><span class="font-bold text-sm" style="color:var(--text-dark);">专业推进版</span></div>
-            <button class="btn-copy" style="color:var(--text-mid);border-color:#FF8E53;" onclick="copyText('reply2',this)">📋 复制</button>
-          </div>
-          <p id="reply2" class="text-sm leading-relaxed" style="color:var(--text-dark);white-space:pre-wrap;">—</p>
-        </div>
-        <div class="version-card-3 mb-3">
-          <div class="flex items-center justify-between mb-2">
-            <div class="flex items-center gap-2"><span>🚀</span><span class="font-bold text-sm text-white">高情商反转版</span></div>
-            <button class="btn-copy" style="color:rgba(255,255,255,0.8);border-color:rgba(255,255,255,0.4);" onclick="copyText('reply3',this)">📋 复制</button>
-          </div>
-          <p id="reply3" class="text-sm leading-relaxed text-white opacity-90" style="white-space:pre-wrap;">—</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- ====== 截图解读 Tab ====== -->
-    <div id="panel-screenshot" class="hidden">
-      <div class="card mb-4">
-        <p class="text-sm font-semibold mb-3" style="color: var(--text-light);">📸 上传聊天截图（支持企微/微信/钉钉等）</p>
-        <div class="upload-zone" id="uploadZone" onclick="triggerUpload()">
-          <input type="file" id="screenshotInput" accept="image/*" onchange="onImageSelect(event)" onclick="event.stopPropagation()" />
-          <div id="uploadPlaceholder">
-            <div class="text-4xl mb-2">📷</div>
-            <p class="text-sm font-semibold" style="color: var(--text-mid);">点击上传 或 粘贴截图（Ctrl+V）</p>
-            <p class="text-xs mt-1" style="color: var(--text-light);">支持 JPG / PNG / WEBP</p>
-          </div>
-          <img id="previewImg" class="preview-img hidden" />
-          <div id="previewActions" class="hidden mt-2 flex justify-center gap-2">
-            <button class="tag-pill text-xs" onclick="clearImage(event)">🗑️ 重新上传</button>
-          </div>
-        </div>
-        <div class="mt-4">
-          <label class="text-xs font-semibold block mb-2" style="color: var(--text-light);">📝 补充说明（选填，帮助AI更准确）</label>
-          <textarea id="screenshotContext" class="input-area" rows="2" placeholder="例如：这是我们项目群，这人是甲方爸爸..."></textarea>
-        </div>
-        <button class="btn-primary w-full mt-4" id="analyzeBtn" onclick="doAnalyze()">🔍 解读截图！</button>
-      </div>
-
-      <div id="analyzeResult" class="hidden result-section">
-        <div class="mb-3"><span class="text-base font-black" style="color: var(--text-dark);">🧠 AI解读结果</span></div>
-        <div class="insight-block">
-          <div class="flex items-center gap-2 mb-3">
-            <span class="text-lg">🎭</span>
-            <span class="font-bold text-base" style="color: var(--text-dark);">对方真实含义</span>
-            <span class="badge" style="background: #FFD6BB; color: #7A5544;">潜台词解读</span>
-          </div>
-          <p id="insight-meaning" class="text-sm leading-relaxed" style="color: var(--text-dark); white-space: pre-wrap;">—</p>
-        </div>
-        <div class="insight-block">
-          <div class="flex items-center gap-2 mb-3">
-            <span class="text-lg">📊</span>
-            <span class="font-bold text-base" style="color: var(--text-dark);">情绪与态度分析</span>
-          </div>
-          <p id="insight-emotion" class="text-sm leading-relaxed" style="color: var(--text-dark); white-space: pre-wrap;">—</p>
-        </div>
-        <div class="insight-block-dark">
-          <div class="flex items-center justify-between mb-3">
-            <div class="flex items-center gap-2">
-              <span class="text-lg">💬</span>
-              <span class="font-bold text-base text-white">建议回复</span>
-              <span class="badge" style="background: rgba(255,255,255,0.2); color: white;">3个选项</span>
-            </div>
-            <button class="btn-copy" style="color: rgba(255,255,255,0.8); border-color: rgba(255,255,255,0.4);" onclick="copyText('insight-reply', this)">📋 复制</button>
-          </div>
-          <p id="insight-reply" class="text-sm leading-relaxed text-white opacity-90" style="white-space: pre-wrap;">—</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- Footer -->
-    <div class="text-center mt-8 pb-4">
-      <p class="text-xs" style="color: var(--text-light);">打工人团结，一起练出高情商嘴皮子 ✊</p>
-      <p class="text-xs mt-1" style="color: var(--text-light);">职场嘴替 · 由「灵感工厂」出品 · Powered by 工蜂AI</p>
+    <!-- Hero -->
+    <div class="hero-header">
+      <span class="hero-logo">🫢</span>
+      <h1 class="hero-title">职场<span>嘴替</span></h1>
+      <p class="hero-slogan" id="sloganText"></p>
     </div>
   </div>
+
+  <!-- ══ Main Content ══ -->
+  <div class="pc-main">
+
+    <!-- LEFT: Input Panel -->
+    <div class="pc-left">
+      <div class="max-w-2xl mx-auto px-4 pb-4 pc-left-inner">
+
+        <!-- Tab切换 -->
+        <div class="tab-bar">
+          <div class="tab-item active" id="tab-translate" onclick="switchTab('translate')">🪄 表达转化</div>
+          <div class="tab-item" id="tab-reply" onclick="switchTab('reply')">💬 回复参考</div>
+          <div class="tab-item" id="tab-screenshot" onclick="switchTab('screenshot')">📸 截图解读</div>
+        </div>
+
+        <!-- ====== 话术翻译 Tab ====== -->
+        <div id="panel-translate">
+          <!-- 快速填入 -->
+          <div class="card mb-4">
+            <p class="text-sm font-semibold mb-3" style="color: var(--text-light);">⚡ 快速填入（点击秒填）</p>
+            <div class="scenarios-wrap">
+              <span class="tag-pill" onclick="fillScenario('这个需求来不及做，我需要拒绝但不想撕破脸')">🙅 拒绝一个需求</span>
+              <span class="tag-pill" onclick="fillScenario('需要催对方给进度，但不想显得催得太急')">⏰ 催进度不尴尬</span>
+              <span class="tag-pill" onclick="fillScenario('跨部门协作对方推进缓慢，我需要推动但不想制造矛盾')">🔗 跨部门推动事情</span>
+              <span class="tag-pill" onclick="fillScenario('需要给领导汇报项目进展，想说得简洁有重点')">📊 给领导汇报进展</span>
+              <span class="tag-pill" onclick="fillScenario('项目需要更多人手或资源，我想合理表达这个诉求')">💪 争取更多资源</span>
+              <span class="tag-pill" onclick="fillScenario('出了一个失误，需要向领导或团队解释，希望坦诚但不显得推卸责任')">🙏 解释一个失误</span>
+              <span class="tag-pill" onclick="fillScenario('我有一个新想法想提出来，希望表达得有建设性、有说服力')">💡 提出一个建议</span>
+              <span class="tag-pill" onclick="fillScenario('收到一条有些难搞的消息，不知道怎么回才不被带节奏')">💬 回一条难搞消息</span>
+              <span class="tag-pill" onclick="fillScenario('周末被要求加班，但我有私事，需要设立边界但不想起冲突')">🌿 边界不冲突</span>
+              <span class="tag-pill" onclick="fillScenario('发现了一个问题需要向上反馈，希望说清楚又不越界')">📝 向上反馈问题</span>
+            </div>
+          </div>
+
+          <!-- 输入区 -->
+          <div class="card mb-4">
+            <p class="text-sm font-semibold mb-3" style="color: var(--text-light);">📝 你想表达什么（直接说就行）</p>
+            <textarea id="inputText" class="input-area" rows="4"
+              placeholder="想说什么都行，不用修饰～比如：这个需求根本来不及做，但又不好意思直接拒绝..."></textarea>
+
+            <!-- 可选设置（折叠） -->
+            <div class="mt-4">
+              <div class="collapse-btn" onclick="toggleCollapse('collapseContent','collapseArrow')">
+                <span class="text-xs font-semibold" style="color: var(--text-light);">⚙️ 可选：指定场景/对象（不填也能用）</span>
+                <span class="collapse-arrow" id="collapseArrow">▼</span>
+              </div>
+              <div class="collapse-content" id="collapseContent">
+                <div class="flex gap-3 mt-3 flex-wrap">
+                  <div class="flex-1 min-w-36">
+                    <label class="block text-xs font-semibold mb-1.5" style="color: var(--text-light);">📍 对话场景</label>
+                    <select id="sceneSelect" class="custom-select w-full">
+                      <option value="不限" selected>🔓 不限（AI自判断）</option>
+                      <option value="向上汇报">📊 向上汇报</option>
+                      <option value="拒绝需求">🚫 拒绝需求</option>
+                      <option value="催促跟进">⏰ 催促跟进</option>
+                      <option value="表达不满">😤 表达不满</option>
+                      <option value="提出异议">💡 提出异议</option>
+                      <option value="婉拒邀请">🙅 婉拒邀请</option>
+                      <option value="争取资源">💪 争取资源</option>
+                      <option value="澄清责任">🔍 澄清责任</option>
+                      <option value="社交文案">📱 社交文案</option>
+                    </select>
+                  </div>
+                  <div class="flex-1 min-w-36">
+                    <label class="block text-xs font-semibold mb-1.5" style="color: var(--text-light);">👤 说话对象</label>
+                    <select id="targetSelect" class="custom-select w-full">
+                      <option value="不限/群聊" selected>👥 不限/群聊</option>
+                      <option value="领导">👔 领导</option>
+                      <option value="平级同事">🤝 平级同事</option>
+                      <option value="下属">👇 下属</option>
+                      <option value="客户">💼 客户</option>
+                      <option value="跨部门同事">🔗 跨部门同事</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <button class="btn-primary w-full mt-5" id="translateBtn" onclick="doTranslate()">
+              🪄 帮我表达清楚！
+            </button>
+            <p class="text-xs text-center mt-2" style="color:var(--text-light);">Ctrl+Enter 快速转化</p>
+          </div>
+
+          <!-- 翻译结果（mobile: inline; PC: moves to right panel via JS） -->
+          <div id="translateResult" class="hidden result-section pc-result-block">
+            <div class="mb-3 flex items-center justify-between">
+              <span class="text-base font-black" style="color: var(--text-dark);">✨ 三个版本，随你挑</span>
+              <button onclick="showCompare()" id="compareBtn" class="tag-pill text-xs hidden">🔄 原文对比</button>
+            </div>
+
+            <!-- 对比模式 -->
+            <div id="compareView" class="hidden mb-4">
+              <div class="compare-wrap">
+                <div class="compare-before">
+                  <p class="text-xs font-bold mb-2" style="color:#999;">💬 你说的</p>
+                  <p id="compareOriginal" class="text-sm leading-relaxed" style="color:#555;white-space:pre-wrap;"></p>
+                </div>
+                <div class="compare-after">
+                  <p class="text-xs font-bold mb-2" style="color:var(--text-mid);">✨ AI翻译版</p>
+                  <p id="compareTranslated" class="text-sm leading-relaxed" style="color:var(--text-dark);white-space:pre-wrap;"></p>
+                </div>
+              </div>
+              <button onclick="hideCompare()" class="text-xs mt-2" style="color:var(--text-light);background:none;border:none;cursor:pointer;">收起对比 ▲</button>
+            </div>
+
+            <div class="version-card version-card-1 mb-3">
+              <div class="flex items-center justify-between mb-2">
+                <div>
+                  <p class="version-label">😊 日常沟通版</p>
+                  <span class="badge" style="background:#E8F5F2;color:var(--v1-accent);font-size:10px;">温和清晰</span>
+                </div>
+                <button class="btn-copy" onclick="copyText('result1', this)">📋 复制</button>
+              </div>
+              <p id="result1" class="text-sm leading-relaxed mt-2" style="color: var(--text-dark); white-space: pre-wrap;">—</p>
+            </div>
+
+            <div class="version-card version-card-2 mb-3">
+              <div class="flex items-center justify-between mb-2">
+                <div>
+                  <p class="version-label">💼 专业边界版</p>
+                  <span class="badge" style="background:#E8EFF8;color:var(--v2-accent);font-size:10px;">清晰有边界</span>
+                </div>
+                <button class="btn-copy" onclick="copyText('result2', this)">📋 复制</button>
+              </div>
+              <p id="result2" class="text-sm leading-relaxed mt-2" style="color: var(--text-dark); white-space: pre-wrap;">—</p>
+            </div>
+
+            <div class="version-card version-card-3 mb-4">
+              <div class="flex items-center justify-between mb-2">
+                <div>
+                  <p class="version-label">🚀 领导视角版</p>
+                  <span class="badge" style="background:#F0EBF9;color:var(--v3-accent);font-size:10px;">换个角度更有力</span>
+                </div>
+                <button class="btn-copy" onclick="copyText('result3', this)">📋 复制</button>
+              </div>
+              <p id="result3" class="text-sm leading-relaxed mt-2" style="color: var(--text-dark); white-space: pre-wrap;">—</p>
+            </div>
+          </div>
+
+          <!-- 历史记录 -->
+          <div id="historySection" class="hidden">
+            <div class="collapse-btn mb-2" onclick="toggleCollapse('historyList','historyArrow')">
+              <span class="text-sm font-bold" style="color:var(--text-mid);">📚 <span id="historyTitle">最近翻译</span></span>
+              <span class="collapse-arrow" id="historyArrow">▼</span>
+            </div>
+            <div class="collapse-content" id="historyList">
+              <div id="historyItems" class="space-y-2 mt-2"></div>
+              <button onclick="clearHistory()" class="text-xs mt-3" style="color:var(--text-light);background:none;border:none;cursor:pointer;">🗑️ 清空历史</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- ====== 回复助手 Tab ====== -->
+        <div id="panel-reply" class="hidden">
+          <div class="card mb-4">
+            <div class="text-center mb-4">
+              <div class="text-3xl mb-2">💬</div>
+              <p class="font-bold" style="color:var(--text-dark);">收到一条消息，不知道怎么回？</p>
+              <p class="text-sm mt-1" style="color:var(--text-light);">粘贴对方说的话，AI帮你想出高情商的回复</p>
+            </div>
+            <label class="text-xs font-semibold block mb-2" style="color:var(--text-light);">📨 对方说的话（粘贴进来）</label>
+            <textarea id="replyInput" class="input-area" rows="4" placeholder="把对方发给你的消息粘贴在这里...比如：「这个方案你再好好想想，感觉不太对」"></textarea>
+
+            <div class="mt-3">
+              <label class="text-xs font-semibold block mb-2" style="color:var(--text-light);">🎯 对方是谁？（可选）</label>
+              <select id="replyTarget" class="custom-select w-full">
+                <option value="不确定">👥 不确定</option>
+                <option value="我的领导">👔 我的领导</option>
+                <option value="平级同事">🤝 平级同事</option>
+                <option value="我的下属">👇 我的下属</option>
+                <option value="客户/甲方">💼 客户/甲方</option>
+                <option value="跨部门同事">🔗 跨部门同事</option>
+              </select>
+            </div>
+
+            <div class="mt-3">
+              <label class="text-xs font-semibold block mb-2" style="color:var(--text-light);">📝 背景补充（选填）</label>
+              <textarea id="replyContext" class="input-area" rows="2" placeholder="比如：对方最近情绪不太好，这件事我也确实有点没做好..."></textarea>
+            </div>
+
+            <button class="btn-primary w-full mt-4" id="replyBtn" onclick="doReply()">💬 帮我想怎么回！</button>
+          </div>
+
+          <div id="replyResult" class="hidden result-section pc-result-block">
+            <div class="mb-3">
+              <span class="text-base font-black" style="color:var(--text-dark);">🧠 AI解读 + 建议回复</span>
+            </div>
+            <div class="insight-block mb-3">
+              <div class="flex items-center gap-2 mb-2">
+                <span class="text-base">🎭</span>
+                <span class="font-bold text-sm" style="color:var(--text-dark);">对方真实意思</span>
+              </div>
+              <p id="replyMeaning" class="text-sm leading-relaxed" style="color:var(--text-dark);white-space:pre-wrap;">—</p>
+            </div>
+            <div class="version-card version-card-1 mb-3">
+              <div class="flex items-center justify-between mb-2">
+                <div><p class="version-label">😊 温和回应版</p></div>
+                <button class="btn-copy" onclick="copyText('reply1',this)">📋 复制</button>
+              </div>
+              <p id="reply1" class="text-sm leading-relaxed mt-1" style="color:var(--text-dark);white-space:pre-wrap;">—</p>
+            </div>
+            <div class="version-card version-card-2 mb-3">
+              <div class="flex items-center justify-between mb-2">
+                <div><p class="version-label">💼 专业推进版</p></div>
+                <button class="btn-copy" onclick="copyText('reply2',this)">📋 复制</button>
+              </div>
+              <p id="reply2" class="text-sm leading-relaxed mt-1" style="color:var(--text-dark);white-space:pre-wrap;">—</p>
+            </div>
+            <div class="version-card version-card-3 mb-3">
+              <div class="flex items-center justify-between mb-2">
+                <div><p class="version-label">🚀 高情商反转版</p></div>
+                <button class="btn-copy" onclick="copyText('reply3',this)">📋 复制</button>
+              </div>
+              <p id="reply3" class="text-sm leading-relaxed mt-1" style="color:var(--text-dark);white-space:pre-wrap;">—</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- ====== 截图解读 Tab ====== -->
+        <div id="panel-screenshot" class="hidden">
+          <div class="card mb-4">
+            <p class="text-sm font-semibold mb-3" style="color: var(--text-light);">📸 上传聊天截图（支持企微/微信/钉钉等）</p>
+            <div class="upload-zone" id="uploadZone" onclick="triggerUpload()">
+              <input type="file" id="screenshotInput" accept="image/*" onchange="onImageSelect(event)" onclick="event.stopPropagation()" />
+              <div id="uploadPlaceholder">
+                <div class="text-4xl mb-2">📷</div>
+                <p class="text-sm font-semibold" style="color: var(--text-mid);">点击上传 或 粘贴截图（Ctrl+V）</p>
+                <p class="text-xs mt-1" style="color: var(--text-light);">支持 JPG / PNG / WEBP</p>
+              </div>
+              <img id="previewImg" class="preview-img hidden" />
+              <div id="previewActions" class="hidden mt-2 flex justify-center gap-2">
+                <button class="tag-pill text-xs" onclick="clearImage(event)">🗑️ 重新上传</button>
+              </div>
+            </div>
+            <div class="mt-4">
+              <label class="text-xs font-semibold block mb-2" style="color: var(--text-light);">📝 补充说明（选填，帮助AI更准确）</label>
+              <textarea id="screenshotContext" class="input-area" rows="2" placeholder="例如：这是我们项目群，这人是甲方爸爸..."></textarea>
+            </div>
+            <button class="btn-primary w-full mt-4" id="analyzeBtn" onclick="doAnalyze()">🔍 解读截图！</button>
+          </div>
+
+          <div id="analyzeResult" class="hidden result-section pc-result-block">
+            <div class="mb-3"><span class="text-base font-black" style="color: var(--text-dark);">🧠 AI解读结果</span></div>
+            <div class="insight-block">
+              <div class="flex items-center gap-2 mb-3">
+                <span class="text-base">🎭</span>
+                <span class="font-bold text-sm" style="color: var(--text-dark);">对方真实含义</span>
+              </div>
+              <p id="insight-meaning" class="text-sm leading-relaxed" style="color: var(--text-dark); white-space: pre-wrap;">—</p>
+            </div>
+            <div class="insight-block">
+              <div class="flex items-center gap-2 mb-3">
+                <span class="text-base">📊</span>
+                <span class="font-bold text-sm" style="color: var(--text-dark);">情绪与态度分析</span>
+              </div>
+              <p id="insight-emotion" class="text-sm leading-relaxed" style="color: var(--text-dark); white-space: pre-wrap;">—</p>
+            </div>
+            <div class="insight-block-accent">
+              <div class="flex items-center justify-between mb-3">
+                <div class="flex items-center gap-2">
+                  <span class="text-base">💬</span>
+                  <span class="font-bold text-sm text-white">建议回复</span>
+                  <span class="badge" style="background: rgba(255,255,255,0.15); color: rgba(255,255,255,0.8); font-size:10px;">3个选项</span>
+                </div>
+                <button class="btn-copy" style="background:rgba(255,255,255,0.1);border-color:rgba(255,255,255,0.2);color:rgba(255,255,255,0.8);" onclick="copyText('insight-reply', this)">📋 复制</button>
+              </div>
+              <p id="insight-reply" class="text-sm leading-relaxed" style="color:rgba(255,255,255,0.85);white-space: pre-wrap;">—</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Footer (mobile) -->
+        <div class="text-center mt-10 pb-6 mobile-only">
+          <p class="text-xs" style="color: var(--text-light);">说得好不如说得对，一起做个表达清晰的职场人 ✊</p>
+          <p class="text-xs mt-1" style="color: var(--text-light);">职场嘴替 · 由「灵感工厂」出品 · Powered by 工蜂AI</p>
+        </div>
+
+      </div>
+    </div><!-- /pc-left -->
+
+    <!-- RIGHT: Result Panel (PC only) -->
+    <div class="pc-right" id="pcRightPanel">
+      <!-- Empty state -->
+      <div id="pcRightEmpty" class="card" style="text-align:center;padding:60px 24px;">
+        <div style="font-size:48px;margin-bottom:16px;">✍️</div>
+        <p class="font-bold" style="color:var(--text-mid);font-size:16px;">输入你想表达的，结果会出现在这里</p>
+        <p class="text-xs mt-2" style="color:var(--text-light);">三个版本同时生成，挑你最顺眼的用</p>
+      </div>
+    </div><!-- /pc-right -->
+
+  </div><!-- /pc-main -->
+
+  <!-- PC Footer -->
+  <div class="pc-footer-bar">
+    <p class="text-xs" style="color:rgba(255,255,255,0.25);">职场嘴替 · 由「灵感工厂」出品 · Powered by 工蜂AI &nbsp;·&nbsp; 说得好不如说得对 ✊</p>
+  </div>
+
+  </div><!-- /pc-shell -->
 
   <script>
+    // ==================== 彩蛋 Slogan ====================
+    const SLOGANS = [
+      '想到了，也能说到位',
+      '不是替你说，是帮你说清楚',
+      '你有想法，我帮你开口',
+      '说话这件事，可以更简单',
+      '职场沟通，不用憋着',
+      '把话说明白，比说漂亮更重要',
+      '有想法不等于会表达，我来补这一步',
+      '说得好不如说得对',
+    ];
+    function initSlogan() {
+      const idx = Math.floor(Math.random() * SLOGANS.length);
+      document.getElementById('sloganText').textContent = SLOGANS[idx];
+    }
+
     // ==================== Tab切换 ====================
+    // ==================== PC Right Panel ====================
+    function isPC() {
+      return window.innerWidth >= 900;
+    }
+
+    function showPCResult(htmlContent) {
+      if (!isPC()) return;
+      const right = document.getElementById('pcRightPanel');
+      const empty = document.getElementById('pcRightEmpty');
+      if (empty) empty.style.display = 'none';
+      // Remove old result if any
+      const old = document.getElementById('pcDynamicResult');
+      if (old) old.remove();
+      const div = document.createElement('div');
+      div.id = 'pcDynamicResult';
+      div.className = 'result-section';
+      div.innerHTML = htmlContent;
+      right.appendChild(div);
+    }
+
+    function syncResultToPC(resultBlockId) {
+      if (!isPC()) return;
+      const block = document.getElementById(resultBlockId);
+      if (!block) return;
+      const right = document.getElementById('pcRightPanel');
+      const empty = document.getElementById('pcRightEmpty');
+      if (empty) empty.style.display = 'none';
+      const old = document.getElementById('pcDynamicResult');
+      if (old) old.remove();
+      const clone = block.cloneNode(true);
+      clone.id = 'pcDynamicResult';
+      clone.classList.remove('hidden', 'pc-result-block');
+      clone.classList.add('result-section');
+      // Remove display:none !important
+      clone.style.display = 'block';
+      right.appendChild(clone);
+    }
+
     function switchTab(tab) {
       ['translate', 'reply', 'screenshot'].forEach(t => {
         document.getElementById('tab-' + t).classList.toggle('active', t === tab);
         document.getElementById('panel-' + t).classList.toggle('hidden', t !== tab);
       });
+      // Reset PC right panel
+      if (isPC()) {
+        const right = document.getElementById('pcRightPanel');
+        const old = document.getElementById('pcDynamicResult');
+        if (old) old.remove();
+        const empty = document.getElementById('pcRightEmpty');
+        if (empty) empty.style.display = '';
+      }
     }
 
     // ==================== 折叠面板（通用） ====================
@@ -648,8 +946,8 @@
         const GF_TOKEN = '0a73acaeb5022b8d1f95e2aa6817626f';
         const sceneText = scene && scene !== '不限' ? `场景：${scene}` : '';
         const targetText = target && target !== '不限/群聊' ? `说话对象：${target}` : '';
-        const sysPrompt = '你是一位在职场摸爬滚打10年的资深打工人，情商极高，说话滴水不漏但让人舒服。把用户心里想说的话翻译成三个版本。必须严格按JSON格式输出，不要加任何markdown或说明：{"v1":"日常礼貌版","v2":"正式边界版","v3":"向上管理版"}';
-        const userPrompt = `我想说的话：「${inputText}」\n${sceneText}\n${targetText}\n\n请给我三个版本：\n1. 日常礼貌版：语气温和，保留关系，1-2句\n2. 正式边界版：有礼有节，边界清晰，1-2句\n3. 向上管理版：高段位视角，展示格局，1-3句\n\n重要：翻译必须针对「${inputText}」这个具体内容，不能用通用套话。`;
+        const sysPrompt = '你是一位在职场摸爬滚打10年的资深打工人，情商极高，说话滴水不漏但让人舒服。把用户心里想说的话转化为三个版本。必须严格按JSON格式输出，不要加任何markdown或说明：{"v1":"日常沟通版","v2":"专业边界版","v3":"领导视角版"}';
+        const userPrompt = `我想表达的意思：「${inputText}」\n${sceneText}\n${targetText}\n\n请给我三个版本：\n1. 日常沟通版：语气温和，表达清晰，1-2句\n2. 专业边界版：有礼有节，边界明确，1-2句\n3. 领导视角版：换到对方视角，更有说服力，1-3句\n\n重要：必须针对「${inputText}」这个具体内容，不能用通用套话。`;
         const response = await fetch(GF_API, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${GF_TOKEN}`, 'X-Username': 'wickyli', 'OAUTH-TOKEN': GF_TOKEN },
@@ -676,7 +974,11 @@
       document.getElementById('compareTranslated').textContent = v1 || '';
       document.getElementById('translateResult').classList.remove('hidden');
       document.getElementById('compareBtn').classList.remove('hidden');
-      setTimeout(() => document.getElementById('translateResult').scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 100);
+      if (isPC()) {
+        syncResultToPC('translateResult');
+      } else {
+        setTimeout(() => document.getElementById('translateResult').scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 100);
+      }
 
       // 保存历史
       saveToHistory(inputText, v1, v2, v3, scene, target);
@@ -742,7 +1044,11 @@
       document.getElementById('reply2').textContent = r2 || '—';
       document.getElementById('reply3').textContent = r3 || '—';
       document.getElementById('replyResult').classList.remove('hidden');
-      setTimeout(() => document.getElementById('replyResult').scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 100);
+      if (isPC()) {
+        syncResultToPC('replyResult');
+      } else {
+        setTimeout(() => document.getElementById('replyResult').scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 100);
+      }
 
       btn.disabled = false;
       btn.innerHTML = '💬 帮我想怎么回！';
@@ -835,7 +1141,11 @@
       document.getElementById('insight-emotion').textContent = emotion || '—';
       document.getElementById('insight-reply').textContent = reply || '—';
       document.getElementById('analyzeResult').classList.remove('hidden');
-      setTimeout(() => document.getElementById('analyzeResult').scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 100);
+      if (isPC()) {
+        syncResultToPC('analyzeResult');
+      } else {
+        setTimeout(() => document.getElementById('analyzeResult').scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 100);
+      }
 
       btn.disabled = false;
       btn.innerHTML = '🔍 解读截图！';
@@ -871,6 +1181,7 @@
 
     // ==================== 初始化 ====================
     document.addEventListener('DOMContentLoaded', () => {
+      initSlogan();
       loadApiConfig();
       renderHistory();
 
