@@ -1,0 +1,1226 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>内容助手 · 提案讨论会 · 会议材料</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #F7F8FA;
+      --bg-white: #FFFFFF;
+      --live: #5B4FCF;
+      --live-light: #7B6FE8;
+      --live-ultra: #EEF0FF;
+      --video: #D4550C;
+      --video-light: #F07030;
+      --video-ultra: #FFF3EC;
+      --teal: #0A7E6A;
+      --teal-ultra: #E6F5F2;
+      --red: #C0392B;
+      --red-ultra: #FEF0EE;
+      --amber: #B7770D;
+      --amber-ultra: #FFFBEC;
+      --gray-900: #1A1D23;
+      --gray-700: #3D4452;
+      --gray-500: #6B7280;
+      --gray-300: #C5CAD3;
+      --gray-100: #F0F2F5;
+      --border: #E2E6EC;
+      --font: -apple-system, 'PingFang SC', 'Noto Sans SC', 'Helvetica Neue', sans-serif;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+      --shadow-md: 0 4px 12px rgba(0,0,0,0.08), 0 2px 4px rgba(0,0,0,0.04);
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--gray-900);
+      font-family: var(--font);
+      font-size: 14px;
+      line-height: 1.65;
+    }
+
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--gray-300); border-radius: 3px; }
+
+    /* ── 打印优化 ── */
+    @media print {
+      .no-print { display: none !important; }
+      body { background: #fff; font-size: 12px; }
+      .card { box-shadow: none; border: 1px solid #ddd; }
+      section { page-break-inside: avoid; }
+    }
+
+    /* ── 顶部导航 ── */
+    .top-bar {
+      background: var(--bg-white);
+      border-bottom: 1px solid var(--border);
+      position: sticky; top: 0; z-index: 50;
+      padding: 0 40px;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 52px;
+    }
+    .top-bar-left { display: flex; align-items: center; gap: 12px; }
+    .top-bar-badge {
+      font-size: 11px; font-weight: 700; letter-spacing: 0.08em;
+      padding: 3px 10px; border-radius: 20px;
+      background: var(--live-ultra); color: var(--live);
+      border: 1px solid rgba(91,79,207,0.2);
+    }
+    .top-bar-title { font-weight: 700; font-size: 14px; color: var(--gray-900); }
+    .top-bar-meta { font-size: 12px; color: var(--gray-500); }
+    .top-bar-nav { display: flex; gap: 24px; }
+    .top-bar-nav a {
+      font-size: 12px; color: var(--gray-500); text-decoration: none;
+      transition: color 0.2s; font-weight: 500;
+    }
+    .top-bar-nav a:hover { color: var(--live); }
+
+    /* ── 布局 ── */
+    .page-wrap { max-width: 1040px; margin: 0 auto; padding: 32px 40px 80px; }
+
+    /* ── 封面卡片 ── */
+    .cover-card {
+      background: var(--bg-white);
+      border-radius: 16px;
+      box-shadow: var(--shadow-md);
+      overflow: hidden;
+      margin-bottom: 32px;
+    }
+    .cover-top {
+      background: linear-gradient(135deg, var(--live) 0%, #8B5CF6 60%, var(--video-light) 100%);
+      padding: 40px 48px 36px;
+      position: relative; overflow: hidden;
+    }
+    .cover-top::before {
+      content: ''; position: absolute; top: -60px; right: -60px;
+      width: 220px; height: 220px; border-radius: 50%;
+      background: rgba(255,255,255,0.06);
+    }
+    .cover-top::after {
+      content: ''; position: absolute; bottom: -40px; right: 80px;
+      width: 140px; height: 140px; border-radius: 50%;
+      background: rgba(255,255,255,0.05);
+    }
+    .cover-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.14em; color: rgba(255,255,255,0.65); text-transform: uppercase; margin-bottom: 12px; }
+    .cover-title { font-size: 30px; font-weight: 900; color: #fff; line-height: 1.1; margin-bottom: 10px; letter-spacing: -0.02em; }
+    .cover-sub { font-size: 14px; color: rgba(255,255,255,0.78); margin-bottom: 0; max-width: 560px; line-height: 1.6; }
+    .cover-bottom {
+      padding: 20px 48px;
+      display: flex; align-items: center; gap: 32px; flex-wrap: wrap;
+      border-bottom: 1px solid var(--border);
+    }
+    .cover-meta-item { display: flex; align-items: center; gap: 8px; }
+    .cover-meta-label { font-size: 11px; font-weight: 700; color: var(--gray-500); letter-spacing: 0.06em; text-transform: uppercase; }
+    .cover-meta-value { font-size: 13px; font-weight: 600; color: var(--gray-900); }
+    .cover-purpose {
+      padding: 20px 48px;
+      background: var(--amber-ultra);
+      border-left: 4px solid var(--amber);
+    }
+    .cover-purpose-label { font-size: 11px; font-weight: 700; color: var(--amber); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 6px; }
+    .cover-purpose-text { font-size: 13px; color: var(--gray-700); line-height: 1.7; }
+    .cover-purpose-text strong { color: var(--gray-900); }
+
+    /* ── 通用卡片 ── */
+    .card {
+      background: var(--bg-white);
+      border-radius: 12px;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--border);
+      margin-bottom: 24px;
+      overflow: hidden;
+    }
+    .card-header {
+      padding: 16px 24px;
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; gap: 10px;
+    }
+    .card-header-icon { font-size: 18px; }
+    .card-header-main { flex: 1; }
+    .card-header-title { font-weight: 800; font-size: 16px; color: var(--gray-900); }
+    .card-header-sub { font-size: 12px; color: var(--gray-500); margin-top: 2px; }
+    .card-body { padding: 20px 24px; }
+
+    /* ── Section 标题 ── */
+    .section-heading {
+      display: flex; align-items: center; gap: 10px;
+      margin: 36px 0 16px;
+    }
+    .section-heading-num {
+      width: 28px; height: 28px; border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 12px; font-weight: 900; color: #fff; flex-shrink: 0;
+    }
+    .section-heading-text { font-size: 18px; font-weight: 800; color: var(--gray-900); }
+    .section-heading-desc { font-size: 12px; color: var(--gray-500); font-weight: 400; }
+
+    /* ── 会议目的 ── */
+    .purpose-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    .purpose-item {
+      background: var(--gray-100); border-radius: 10px; padding: 16px;
+      border: 1px solid var(--border);
+    }
+    .purpose-item-num { font-size: 20px; font-weight: 900; color: var(--live-light); margin-bottom: 6px; }
+    .purpose-item-title { font-size: 13px; font-weight: 700; margin-bottom: 4px; }
+    .purpose-item-desc { font-size: 12px; color: var(--gray-500); line-height: 1.6; }
+
+    /* ── 参会人员 ── */
+    .attendee-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    .attendee-card {
+      border-radius: 10px; padding: 18px; position: relative;
+      border: 1px solid; overflow: hidden;
+    }
+    .attendee-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    }
+    .attendee-card.pm { border-color: rgba(91,79,207,0.2); background: var(--live-ultra); }
+    .attendee-card.pm::before { background: var(--live); }
+    .attendee-card.live-exp { border-color: rgba(10,126,106,0.2); background: var(--teal-ultra); }
+    .attendee-card.live-exp::before { background: var(--teal); }
+    .attendee-card.video-lead { border-color: rgba(212,85,12,0.2); background: var(--video-ultra); }
+    .attendee-card.video-lead::before { background: var(--video); }
+    .attendee-card.intern { border-color: rgba(183,119,13,0.2); background: var(--amber-ultra); }
+    .attendee-card.intern::before { background: var(--amber); }
+    .attendee-role { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 6px; }
+    .attendee-card.pm .attendee-role { color: var(--live); }
+    .attendee-card.live-exp .attendee-role { color: var(--teal); }
+    .attendee-card.video-lead .attendee-role { color: var(--video); }
+    .attendee-card.intern .attendee-role { color: var(--amber); }
+    .attendee-name { font-size: 15px; font-weight: 800; margin-bottom: 8px; color: var(--gray-900); }
+    .attendee-tasks { display: flex; flex-direction: column; gap: 4px; }
+    .attendee-task { font-size: 11.5px; color: var(--gray-700); display: flex; align-items: flex-start; gap: 6px; line-height: 1.5; }
+    .attendee-task::before { content: '→'; flex-shrink: 0; margin-top: 1px; }
+    .attendee-expect { font-size: 11px; color: var(--gray-500); margin-top: 10px; padding-top: 10px; border-top: 1px solid rgba(0,0,0,0.06); font-style: italic; }
+
+    /* ── 议程 ── */
+    .agenda-list { display: flex; flex-direction: column; gap: 0; }
+    .agenda-item {
+      display: grid; grid-template-columns: 56px 44px 1fr; gap: 0; align-items: stretch;
+      border-bottom: 1px solid var(--border);
+    }
+    .agenda-item:last-child { border-bottom: none; }
+    .agenda-time {
+      padding: 16px 12px; font-size: 12px; font-weight: 700; color: var(--gray-500);
+      display: flex; align-items: center; justify-content: center;
+      text-align: center; line-height: 1.4;
+      border-right: 1px solid var(--border);
+    }
+    .agenda-num-col {
+      padding: 16px 0; display: flex; align-items: center; justify-content: center;
+      border-right: 1px solid var(--border);
+    }
+    .agenda-num {
+      width: 24px; height: 24px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 11px; font-weight: 900; color: #fff;
+    }
+    .agenda-content { padding: 14px 20px; }
+    .agenda-title { font-size: 14px; font-weight: 700; margin-bottom: 4px; }
+    .agenda-desc { font-size: 12px; color: var(--gray-500); line-height: 1.6; }
+    .agenda-owner {
+      display: inline-flex; align-items: center; gap: 4px;
+      font-size: 10.5px; font-weight: 700; padding: 2px 8px; border-radius: 4px;
+      margin-top: 6px;
+    }
+    .agenda-item.type-intro .agenda-num { background: var(--live); }
+    .agenda-item.type-discuss .agenda-num { background: var(--video); }
+    .agenda-item.type-divide .agenda-num { background: var(--teal); }
+    .agenda-item.type-action .agenda-num { background: var(--amber); }
+    .agenda-break { background: var(--gray-100); }
+    .agenda-break .agenda-content { color: var(--gray-500); font-style: italic; font-size: 12px; display: flex; align-items: center; }
+
+    /* ── 背景卡片（预读材料）── */
+    .context-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .context-block {
+      border-radius: 10px; padding: 18px; border: 1px solid;
+    }
+    .context-block.live-block { border-color: rgba(91,79,207,0.25); background: var(--live-ultra); }
+    .context-block.video-block { border-color: rgba(212,85,12,0.25); background: var(--video-ultra); }
+    .context-block-title { font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 12px; }
+    .context-block.live-block .context-block-title { color: var(--live); }
+    .context-block.video-block .context-block-title { color: var(--video); }
+    .context-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+    .context-list li { font-size: 12.5px; color: var(--gray-700); display: flex; align-items: flex-start; gap: 8px; line-height: 1.5; }
+    .context-list li::before { content: '•'; flex-shrink: 0; margin-top: 1px; }
+    .context-list.live li::before { color: var(--live); }
+    .context-list.video li::before { color: var(--video); }
+
+    /* ── 讨论议题 ── */
+    .topic-list { display: flex; flex-direction: column; gap: 16px; }
+    .topic-card {
+      border-radius: 10px; border: 1px solid var(--border); overflow: hidden;
+      transition: box-shadow 0.2s;
+    }
+    .topic-card:hover { box-shadow: var(--shadow-md); }
+    .topic-head {
+      padding: 14px 20px; display: flex; align-items: center; gap: 12px;
+      border-bottom: 1px solid var(--border);
+    }
+    .topic-num {
+      width: 28px; height: 28px; border-radius: 8px; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 12px; font-weight: 900; color: #fff;
+    }
+    .topic-head-main { flex: 1; }
+    .topic-head-title { font-size: 14px; font-weight: 700; }
+    .topic-head-sub { font-size: 11px; color: var(--gray-500); margin-top: 2px; }
+    .topic-owner {
+      font-size: 10px; font-weight: 700; letter-spacing: 0.06em; padding: 3px 10px; border-radius: 20px;
+    }
+    .topic-body { padding: 16px 20px; background: var(--bg-white); }
+    .topic-questions { list-style: none; display: flex; flex-direction: column; gap: 8px; margin-bottom: 14px; }
+    .topic-questions li {
+      font-size: 13px; color: var(--gray-700); display: flex; align-items: flex-start; gap: 8px; line-height: 1.6;
+    }
+    .topic-q-icon { font-size: 12px; flex-shrink: 0; margin-top: 3px; }
+    .topic-decision { font-size: 12px; color: var(--gray-500); padding: 10px 14px; background: var(--gray-100); border-radius: 8px; }
+    .topic-decision strong { color: var(--gray-700); }
+
+    /* 议题类型颜色 */
+    .topic-card.t-product .topic-num { background: var(--live); }
+    .topic-card.t-product .topic-head { background: var(--live-ultra); border-color: rgba(91,79,207,0.15); }
+    .topic-card.t-product .topic-owner { background: var(--live-ultra); color: var(--live); border: 1px solid rgba(91,79,207,0.2); }
+    .topic-card.t-content .topic-num { background: var(--video); }
+    .topic-card.t-content .topic-head { background: var(--video-ultra); border-color: rgba(212,85,12,0.15); }
+    .topic-card.t-content .topic-owner { background: var(--video-ultra); color: var(--video); border: 1px solid rgba(212,85,12,0.2); }
+    .topic-card.t-plan .topic-num { background: var(--teal); }
+    .topic-card.t-plan .topic-head { background: var(--teal-ultra); border-color: rgba(10,126,106,0.15); }
+    .topic-card.t-plan .topic-owner { background: var(--teal-ultra); color: var(--teal); border: 1px solid rgba(10,126,106,0.2); }
+    .topic-card.t-resource .topic-num { background: var(--amber); }
+    .topic-card.t-resource .topic-head { background: var(--amber-ultra); border-color: rgba(183,119,13,0.15); }
+    .topic-card.t-resource .topic-owner { background: var(--amber-ultra); color: var(--amber); border: 1px solid rgba(183,119,13,0.2); }
+
+    /* ── 分工表 ── */
+    .duty-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .duty-card { border-radius: 10px; border: 1px solid; overflow: hidden; }
+    .duty-head { padding: 14px 16px; }
+    .duty-role { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 4px; }
+    .duty-name { font-size: 15px; font-weight: 800; }
+    .duty-head.live-expert { background: var(--teal-ultra); border-bottom: 1px solid rgba(10,126,106,0.2); }
+    .duty-head.live-expert .duty-role { color: var(--teal); }
+    .duty-head.video-lead { background: var(--video-ultra); border-bottom: 1px solid rgba(212,85,12,0.2); }
+    .duty-head.video-lead .duty-role { color: var(--video); }
+    .duty-head.intern { background: var(--amber-ultra); border-bottom: 1px solid rgba(183,119,13,0.2); }
+    .duty-head.intern .duty-role { color: var(--amber); }
+    .duty-card.live-expert { border-color: rgba(10,126,106,0.25); }
+    .duty-card.video-lead { border-color: rgba(212,85,12,0.25); }
+    .duty-card.intern { border-color: rgba(183,119,13,0.25); }
+    .duty-body { padding: 14px 16px; background: var(--bg-white); }
+    .duty-phase { margin-bottom: 12px; }
+    .duty-phase-label { font-size: 10px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--gray-500); margin-bottom: 6px; }
+    .duty-task-list { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+    .duty-task-list li { font-size: 12px; color: var(--gray-700); display: flex; gap: 8px; align-items: flex-start; line-height: 1.5; }
+    .duty-task-list li::before { content: '✓'; flex-shrink: 0; font-size: 10px; margin-top: 2px; }
+    .duty-task-list.live-t li::before { color: var(--teal); }
+    .duty-task-list.video-t li::before { color: var(--video); }
+    .duty-task-list.intern-t li::before { color: var(--amber); }
+    .duty-deliverable {
+      margin-top: 12px; padding: 10px 12px;
+      background: var(--gray-100); border-radius: 8px;
+      font-size: 11.5px; color: var(--gray-700); line-height: 1.6;
+    }
+    .duty-deliverable strong { color: var(--gray-900); font-size: 11px; font-weight: 700; display: block; margin-bottom: 4px; letter-spacing: 0.06em; }
+
+    /* ── 时间线 ── */
+    .timeline { position: relative; padding-left: 32px; }
+    .timeline::before {
+      content: ''; position: absolute; left: 10px; top: 8px; bottom: 8px;
+      width: 2px; background: var(--border);
+    }
+    .tl-item { position: relative; margin-bottom: 24px; }
+    .tl-item:last-child { margin-bottom: 0; }
+    .tl-dot {
+      position: absolute; left: -28px; top: 3px;
+      width: 14px; height: 14px; border-radius: 50%; border: 2px solid var(--bg-white);
+    }
+    .tl-phase { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gray-500); margin-bottom: 4px; }
+    .tl-title { font-size: 14px; font-weight: 700; margin-bottom: 6px; }
+    .tl-items { list-style: none; display: flex; flex-direction: column; gap: 4px; }
+    .tl-items li { font-size: 12.5px; color: var(--gray-700); display: flex; gap: 6px; }
+    .tl-items li::before { content: '—'; color: var(--gray-300); flex-shrink: 0; }
+    .tl-item.p1 .tl-dot { background: var(--live); }
+    .tl-item.p1 .tl-title { color: var(--live); }
+    .tl-item.p2 .tl-dot { background: var(--video); }
+    .tl-item.p2 .tl-title { color: var(--video); }
+    .tl-item.p3 .tl-dot { background: var(--teal); }
+    .tl-item.p3 .tl-title { color: var(--teal); }
+    .tl-item.p4 .tl-dot { background: var(--gray-500); }
+    .tl-item.p4 .tl-title { color: var(--gray-500); }
+
+    /* ── 会前须知 ── */
+    .prereq-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .prereq-block { border-radius: 10px; padding: 18px; border: 1px solid var(--border); }
+    .prereq-block-title { font-size: 12px; font-weight: 700; color: var(--gray-700); margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+    .prereq-list { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+    .prereq-list li { font-size: 12.5px; color: var(--gray-700); display: flex; gap: 8px; align-items: flex-start; line-height: 1.5; }
+    .prereq-list li .tag {
+      font-size: 10px; font-weight: 700; padding: 1px 7px; border-radius: 4px; flex-shrink: 0; margin-top: 2px;
+    }
+
+    /* ── 行动输出 ── */
+    .action-table { width: 100%; border-collapse: collapse; }
+    .action-table th {
+      background: var(--gray-100); font-size: 11px; font-weight: 700; letter-spacing: 0.06em;
+      text-transform: uppercase; color: var(--gray-500); padding: 10px 14px;
+      text-align: left; border-bottom: 2px solid var(--border);
+    }
+    .action-table td {
+      padding: 12px 14px; font-size: 13px; border-bottom: 1px solid var(--border);
+      vertical-align: top; line-height: 1.5;
+    }
+    .action-table tr:last-child td { border-bottom: none; }
+    .action-table tr:hover td { background: var(--gray-100); }
+    .p-badge {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 28px; height: 20px; border-radius: 4px;
+      font-size: 10px; font-weight: 900; color: #fff;
+    }
+    .p-badge.p0 { background: var(--red); }
+    .p-badge.p1 { background: var(--video); }
+    .p-badge.p2 { background: var(--teal); }
+    .owner-tag {
+      font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 4px;
+      background: var(--gray-100); color: var(--gray-700); border: 1px solid var(--border);
+    }
+    .ddl-tag { font-size: 12px; color: var(--gray-500); }
+
+    /* ── 底部备注 ── */
+    .note-box {
+      background: var(--live-ultra); border: 1px solid rgba(91,79,207,0.2);
+      border-radius: 10px; padding: 16px 20px;
+      font-size: 13px; color: var(--gray-700); line-height: 1.7;
+      margin-top: 24px;
+    }
+    .note-box strong { color: var(--live); }
+
+    /* ── 响应式 ── */
+    @media (max-width: 768px) {
+      .page-wrap { padding: 20px 20px 60px; }
+      .top-bar { padding: 0 20px; }
+      .top-bar-nav { display: none; }
+      .cover-top { padding: 28px 24px; }
+      .cover-bottom { padding: 16px 24px; gap: 16px; }
+      .cover-purpose { padding: 16px 24px; }
+      .purpose-grid, .attendee-grid, .context-grid, .duty-grid, .prereq-grid { grid-template-columns: 1fr; }
+      .agenda-item { grid-template-columns: 48px 36px 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── 顶部导航 ── -->
+<div class="top-bar no-print">
+  <div class="top-bar-left">
+    <span class="top-bar-badge">会议材料</span>
+    <span class="top-bar-title">内容助手 · 提案讨论会</span>
+    <span class="top-bar-meta">2026.04 · IEG游戏直播生态</span>
+  </div>
+  <nav class="top-bar-nav">
+    <a href="#purpose">会议目的</a>
+    <a href="#agenda">议程</a>
+    <a href="#topics">讨论议题</a>
+    <a href="#duty">分工</a>
+    <a href="#actions">行动项</a>
+  </nav>
+</div>
+
+<div class="page-wrap">
+
+  <!-- ══════════════════════════════════ -->
+  <!-- 封面                              -->
+  <!-- ══════════════════════════════════ -->
+  <div class="cover-card">
+    <div class="cover-top">
+      <div class="cover-eyebrow">IEG · 游戏直播生态 · 内部工作会议</div>
+      <div class="cover-title">内容助手<br>提案材料讨论 & 分工会</div>
+      <div class="cover-sub">梳理「直播+视频双引擎」完整方案，对齐提案内容，明确各角色分工，推动正式立项进入下一阶段。</div>
+    </div>
+    <div class="cover-bottom">
+      <div class="cover-meta-item">
+        <span class="cover-meta-label">会议日期</span>
+        <span class="cover-meta-value">2026年4月 · 待定</span>
+      </div>
+      <div class="cover-meta-item">
+        <span class="cover-meta-label">会议时长</span>
+        <span class="cover-meta-value">90 分钟</span>
+      </div>
+      <div class="cover-meta-item">
+        <span class="cover-meta-label">会议形式</span>
+        <span class="cover-meta-value">线上/线下均可</span>
+      </div>
+      <div class="cover-meta-item">
+        <span class="cover-meta-label">发起人</span>
+        <span class="cover-meta-value">wickyli（PM）</span>
+      </div>
+      <div class="cover-meta-item">
+        <span class="cover-meta-label">版本</span>
+        <span class="cover-meta-value">v1 · 首次提案讨论</span>
+      </div>
+    </div>
+    <div class="cover-purpose">
+      <div class="cover-purpose-label">🎯 本次会议目的</div>
+      <div class="cover-purpose-text">
+        这不是汇报会，是<strong>工作会议</strong>。PM 需要每位成员的专业输入来完善提案，同时对齐分工。
+        希望所有人<strong>带着问题、带着意见来</strong>，有争议的地方当场拍板，避免提案方向跑偏。
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════ -->
+  <!-- 1. 会议目的                        -->
+  <!-- ══════════════════════════════════ -->
+  <div class="section-heading" id="purpose">
+    <div class="section-heading-num" style="background: var(--live);">1</div>
+    <div>
+      <div class="section-heading-text">会议目的</div>
+      <div class="section-heading-desc">这次会议我们要解决的3件事</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-body">
+      <div class="purpose-grid">
+        <div class="purpose-item">
+          <div class="purpose-item-num">01</div>
+          <div class="purpose-item-title">对齐方案认知</div>
+          <div class="purpose-item-desc">让直播专家和视频负责人都看懂「内容助手」的完整构想，识别哪些地方描述不准确、哪些地方有专业漏洞</div>
+        </div>
+        <div class="purpose-item">
+          <div class="purpose-item-num">02</div>
+          <div class="purpose-item-title">完善提案内容</div>
+          <div class="purpose-item-desc">结合各自领域的一线经验，补充提案中缺失的细节，让方案更有说服力、更落地</div>
+        </div>
+        <div class="purpose-item">
+          <div class="purpose-item-num">03</div>
+          <div class="purpose-item-title">明确分工下一步</div>
+          <div class="purpose-item-desc">确定正式提案前每人负责什么模块，给实习生明确的执行任务，下周前产出提案定稿版</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════ -->
+  <!-- 2. 参会人员                        -->
+  <!-- ══════════════════════════════════ -->
+  <div class="section-heading" id="attendees">
+    <div class="section-heading-num" style="background: var(--teal);">2</div>
+    <div>
+      <div class="section-heading-text">参会人员 & 角色定位</div>
+      <div class="section-heading-desc">每个人在这次会议里扮演的角色</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-body">
+      <div class="attendee-grid" style="grid-template-columns: repeat(2,1fr) repeat(2,1fr);">
+        <div class="attendee-card pm">
+          <div class="attendee-role">项目PM · 召集人</div>
+          <div class="attendee-name">wickyli</div>
+          <div class="attendee-tasks">
+            <div class="attendee-task">负责整体提案框架和推进节奏</div>
+            <div class="attendee-task">主持本次会议，拍板关键决策</div>
+            <div class="attendee-task">对接外部资源和审批流程</div>
+          </div>
+          <div class="attendee-expect">今天重点：听专家意见，找提案漏洞</div>
+        </div>
+        <div class="attendee-card live-exp">
+          <div class="attendee-role">直播专家 · 核心输入方</div>
+          <div class="attendee-name">直播专家</div>
+          <div class="attendee-tasks">
+            <div class="attendee-task">验证直播引擎各功能的可行性</div>
+            <div class="attendee-task">补充一线主播真实使用场景</div>
+            <div class="attendee-task">识别"想当然"的需求陷阱</div>
+          </div>
+          <div class="attendee-expect">今天重点：<strong>挑毛病</strong>，越犀利越好</div>
+        </div>
+        <div class="attendee-card video-lead">
+          <div class="attendee-role">视频负责人 · 核心输入方</div>
+          <div class="attendee-name">视频负责人</div>
+          <div class="attendee-tasks">
+            <div class="attendee-task">评估视频引擎功能的技术实现路径</div>
+            <div class="attendee-task">补充视频内容制作的专业视角</div>
+            <div class="attendee-task">建议视频引擎的优先级排序</div>
+          </div>
+          <div class="attendee-expect">今天重点：判断哪些能做、哪些不现实</div>
+        </div>
+        <div class="attendee-card intern">
+          <div class="attendee-role">执行同学 · 实习生</div>
+          <div class="attendee-name">暄雅 / 永涛</div>
+          <div class="attendee-tasks">
+            <div class="attendee-task">会议记录和内容整理</div>
+            <div class="attendee-task">提案材料的执行制作</div>
+            <div class="attendee-task">调研任务和数据收集</div>
+          </div>
+          <div class="attendee-expect">今天重点：搞清楚自己的具体任务</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════ -->
+  <!-- 3. 预读材料 / 背景对齐              -->
+  <!-- ══════════════════════════════════ -->
+  <div class="section-heading" id="prereading">
+    <div class="section-heading-num" style="background: var(--gray-500);">3</div>
+    <div>
+      <div class="section-heading-text">会前必读 · 背景对齐</div>
+      <div class="section-heading-desc">进入讨论前，请确认对以下内容有基本认知</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header">
+      <div class="card-header-icon">📋</div>
+      <div class="card-header-main">
+        <div class="card-header-title">内容助手 · 方案速览（5分钟版）</div>
+        <div class="card-header-sub">这是提案的核心骨架，讨论的基础</div>
+      </div>
+    </div>
+    <div class="card-body">
+
+      <!-- 产品定位 -->
+      <div style="background: var(--gray-100); border-radius: 10px; padding: 16px; margin-bottom: 16px; border-left: 4px solid var(--live);">
+        <div style="font-size: 11px; font-weight: 700; color: var(--live); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 6px;">产品定位</div>
+        <div style="font-size: 15px; font-weight: 800; margin-bottom: 4px;">内容助手 — 直播×视频双引擎</div>
+        <div style="font-size: 13px; color: var(--gray-700);">你专注游戏，内容助手负责其他一切。一个人，做到两个人的事。</div>
+      </div>
+
+      <!-- 核心痛点 -->
+      <div style="margin-bottom: 16px;">
+        <div style="font-size: 12px; font-weight: 700; color: var(--gray-700); margin-bottom: 10px;">🔥 核心痛点（为什么需要这个产品）</div>
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;">
+          <div style="background: var(--red-ultra); border-radius: 8px; padding: 12px; border: 1px solid rgba(192,57,43,0.15);">
+            <div style="font-size: 18px; margin-bottom: 6px;">⏰</div>
+            <div style="font-size: 12px; font-weight: 700; margin-bottom: 3px;">时间黑洞</div>
+            <div style="font-size: 11.5px; color: var(--gray-500);">直播+剪辑+运营，每天12h+，没有喘息时间</div>
+          </div>
+          <div style="background: var(--red-ultra); border-radius: 8px; padding: 12px; border: 1px solid rgba(192,57,43,0.15);">
+            <div style="font-size: 18px; margin-bottom: 6px;">🎬</div>
+            <div style="font-size: 12px; font-weight: 700; margin-bottom: 3px;">内容浪费</div>
+            <div style="font-size: 11.5px; color: var(--gray-500);">80%直播高光内容从未被二次利用，每条视频手剪2-4小时</div>
+          </div>
+          <div style="background: var(--red-ultra); border-radius: 8px; padding: 12px; border: 1px solid rgba(192,57,43,0.15);">
+            <div style="font-size: 18px; margin-bottom: 6px;">⛓️</div>
+            <div style="font-size: 12px; font-weight: 700; margin-bottom: 3px;">平台依赖</div>
+            <div style="font-size: 11.5px; color: var(--gray-500);">算法黑箱+独家协议，一套内容发不了多平台</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 双引擎 -->
+      <div class="context-grid">
+        <div class="context-block live-block">
+          <div class="context-block-title">🎮 直播引擎（Live Engine）</div>
+          <ul class="context-list live">
+            <li><strong>GameSense</strong> — 识别高光时刻，自动标记素材</li>
+            <li><strong>ChatRadar</strong> — 弹幕热点检测，关键信息浮窗提示</li>
+            <li><strong>FlowAssist</strong> — 实时话题建议，冷场主动介入</li>
+            <li><strong>互动陪伴</strong> — 观众记忆+情绪守护+快捷回复库</li>
+            <li><strong>LiveHUD</strong> — 数据可视化+异常实时预警</li>
+          </ul>
+        </div>
+        <div class="context-block video-block">
+          <div class="context-block-title">🎬 视频引擎（Video Engine）</div>
+          <ul class="context-list video">
+            <li><strong>SmartClip</strong> — 下播10分钟出片，彻底告别手剪</li>
+            <li><strong>StyleAdapt</strong> — 一套素材自动生成多平台版本</li>
+            <li><strong>AutoPack</strong> — 自动字幕+AI封面+BGM，零门槛包装</li>
+            <li><strong>MultiPost</strong> — 5+平台同步，最佳时间智能推荐</li>
+            <li><strong>VideoLoop</strong> — 视频数据反哺直播，形成增强闭环</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 四阶段 -->
+      <div style="margin-top: 16px;">
+        <div style="font-size: 12px; font-weight: 700; color: var(--gray-700); margin-bottom: 10px;">🗺️ 四阶段演进路线</div>
+        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px;">
+          <div style="background: rgba(91,79,207,0.08); border-radius: 8px; padding: 12px; border: 1px solid rgba(91,79,207,0.15);">
+            <div style="font-size: 10px; font-weight: 700; color: var(--live); margin-bottom: 4px;">PHASE 1 · 0-3月</div>
+            <div style="font-size: 12px; font-weight: 700;">游戏直播AI副驾</div>
+            <div style="font-size: 11px; color: var(--gray-500); margin-top: 3px;">直播引擎+智能切片MVP</div>
+          </div>
+          <div style="background: rgba(212,85,12,0.08); border-radius: 8px; padding: 12px; border: 1px solid rgba(212,85,12,0.15);">
+            <div style="font-size: 10px; font-weight: 700; color: var(--video); margin-bottom: 4px;">PHASE 2 · 3-6月</div>
+            <div style="font-size: 12px; font-weight: 700;">内容分身全上线</div>
+            <div style="font-size: 11px; color: var(--gray-500); margin-top: 3px;">视频引擎完整版+5平台分发</div>
+          </div>
+          <div style="background: rgba(10,126,106,0.08); border-radius: 8px; padding: 12px; border: 1px solid rgba(10,126,106,0.15);">
+            <div style="font-size: 10px; font-weight: 700; color: var(--teal); margin-bottom: 4px;">PHASE 3 · 6-12月</div>
+            <div style="font-size: 12px; font-weight: 700;">时空分身代播</div>
+            <div style="font-size: 11px; color: var(--gray-500); margin-top: 3px;">AI代播+数据回流系统</div>
+          </div>
+          <div style="background: var(--gray-100); border-radius: 8px; padding: 12px; border: 1px solid var(--border);">
+            <div style="font-size: 10px; font-weight: 700; color: var(--gray-500); margin-bottom: 4px;">PHASE 4 · 12月+</div>
+            <div style="font-size: 12px; font-weight: 700;">AI双生融合</div>
+            <div style="font-size: 11px; color: var(--gray-500); margin-top: 3px;">AI孪生自主进化+生态锁定</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-top: 16px; padding: 12px 16px; background: var(--gray-100); border-radius: 8px; font-size: 12px; color: var(--gray-500);">
+        📎 完整提案网站：<strong>twin-proposal/index.html</strong>（已在服务器部署，本次会议前会发链接）&nbsp;&nbsp;
+        📎 iWiki文档：<a href="https://iwiki.woa.com/p/4018610977" style="color: var(--live);">https://iwiki.woa.com/p/4018610977</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════ -->
+  <!-- 4. 会议议程                        -->
+  <!-- ══════════════════════════════════ -->
+  <div class="section-heading" id="agenda">
+    <div class="section-heading-num" style="background: var(--video);">4</div>
+    <div>
+      <div class="section-heading-text">会议议程</div>
+      <div class="section-heading-desc">90分钟，4个环节，每个环节有明确产出</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="agenda-list">
+
+      <div class="agenda-item type-intro">
+        <div class="agenda-time">0'<br>-<br>10'</div>
+        <div class="agenda-num-col"><div class="agenda-num">1</div></div>
+        <div class="agenda-content">
+          <div class="agenda-title">背景介绍 & 方案速览</div>
+          <div class="agenda-desc">PM用10分钟讲清楚「内容助手」是什么、为什么做、做到什么程度。非汇报，目的是让所有人站在同一起点。</div>
+          <div><span class="agenda-owner" style="background: var(--live-ultra); color: var(--live); border: 1px solid rgba(91,79,207,0.2); border-radius: 4px; padding: 2px 8px; font-size: 10.5px; font-weight: 700;">👤 PM主讲</span></div>
+        </div>
+      </div>
+
+      <div class="agenda-item type-discuss">
+        <div class="agenda-time">10'<br>-<br>45'</div>
+        <div class="agenda-num-col"><div class="agenda-num">2</div></div>
+        <div class="agenda-content">
+          <div class="agenda-title">专家评审 · 直播线 + 视频线</div>
+          <div class="agenda-desc">
+            两位专家分别对各自领域的方案进行评审：<br>
+            <strong>直播专家（15min）</strong>：直播引擎各功能的专业判断，哪些可行、哪些想当然、哪些还缺什么<br>
+            <strong>视频负责人（15min）</strong>：视频引擎的实现路径评估，优先级建议，与现有能力的差距
+          </div>
+          <div style="display: flex; gap: 8px; margin-top: 6px; flex-wrap: wrap;">
+            <span class="agenda-owner" style="background: var(--teal-ultra); color: var(--teal); border: 1px solid rgba(10,126,106,0.2); border-radius: 4px; padding: 2px 8px; font-size: 10.5px; font-weight: 700;">🎮 直播专家评审</span>
+            <span class="agenda-owner" style="background: var(--video-ultra); color: var(--video); border: 1px solid rgba(212,85,12,0.2); border-radius: 4px; padding: 2px 8px; font-size: 10.5px; font-weight: 700;">🎬 视频负责人评审</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="agenda-item type-discuss">
+        <div class="agenda-time">45'<br>-<br>70'</div>
+        <div class="agenda-num-col"><div class="agenda-num">3</div></div>
+        <div class="agenda-content">
+          <div class="agenda-title">议题集中讨论</div>
+          <div class="agenda-desc">按照预设议题进行深度讨论，每个议题有明确的决策目标。详见「讨论议题」板块。</div>
+          <div><span class="agenda-owner" style="background: var(--amber-ultra); color: var(--amber); border: 1px solid rgba(183,119,13,0.2); border-radius: 4px; padding: 2px 8px; font-size: 10.5px; font-weight: 700;">👥 全员参与</span></div>
+        </div>
+      </div>
+
+      <div class="agenda-item type-divide">
+        <div class="agenda-time">70'<br>-<br>85'</div>
+        <div class="agenda-num-col"><div class="agenda-num">4</div></div>
+        <div class="agenda-content">
+          <div class="agenda-title">分工确认 & 输出清单</div>
+          <div class="agenda-desc">PM提出分工建议，各方确认自己负责的部分，实习生明确执行任务和deadline。会议结束前必须产出「行动项清单」。</div>
+          <div><span class="agenda-owner" style="background: var(--teal-ultra); color: var(--teal); border: 1px solid rgba(10,126,106,0.2); border-radius: 4px; padding: 2px 8px; font-size: 10.5px; font-weight: 700;">🎯 PM主导</span></div>
+        </div>
+      </div>
+
+      <div class="agenda-item agenda-break">
+        <div class="agenda-time" style="color: var(--gray-300);">85'<br>-<br>90'</div>
+        <div class="agenda-num-col"></div>
+        <div class="agenda-content" style="color: var(--gray-500); font-size: 12px; font-style: italic;">
+          预留缓冲 / 会后一对一补充沟通时间
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════ -->
+  <!-- 5. 讨论议题                        -->
+  <!-- ══════════════════════════════════ -->
+  <div class="section-heading" id="topics">
+    <div class="section-heading-num" style="background: var(--red);">5</div>
+    <div>
+      <div class="section-heading-text">集中讨论议题</div>
+      <div class="section-heading-desc">7个必须在会上对齐的问题，每个都有明确的期望产出</div>
+    </div>
+  </div>
+
+  <div class="topic-list">
+
+    <!-- T1 -->
+    <div class="topic-card t-product card">
+      <div class="topic-head">
+        <div class="topic-num">T1</div>
+        <div class="topic-head-main">
+          <div class="topic-head-title">产品定位是否清晰？「内容助手」的边界在哪</div>
+          <div class="topic-head-sub">类型：产品方向 · 预计15分钟</div>
+        </div>
+        <span class="topic-owner">🎮 直播专家主导</span>
+      </div>
+      <div class="topic-body">
+        <ul class="topic-questions">
+          <li><span class="topic-q-icon">❓</span>「内容助手」这个名字准确吗？主播听到会理解成什么？有没有更好的描述方式？</li>
+          <li><span class="topic-q-icon">❓</span>直播引擎和视频引擎，对主播来说哪个更刚需？哪个是「必须有」vs「有了更好」？</li>
+          <li><span class="topic-q-icon">❓</span>目标用户到底是哪类主播？头部/腰部/尾部，游戏品类是否有侧重？</li>
+        </ul>
+        <div class="topic-decision"><strong>期望产出：</strong>确认产品定位描述，明确 Phase 1 的核心目标用户画像</div>
+      </div>
+    </div>
+
+    <!-- T2 -->
+    <div class="topic-card t-product card">
+      <div class="topic-head">
+        <div class="topic-num">T2</div>
+        <div class="topic-head-main">
+          <div class="topic-head-title">直播引擎的功能优先级评审</div>
+          <div class="topic-head-sub">类型：功能评审 · 预计15分钟</div>
+        </div>
+        <span class="topic-owner">🎮 直播专家主导</span>
+      </div>
+      <div class="topic-body">
+        <ul class="topic-questions">
+          <li><span class="topic-q-icon">❓</span>GameSense（游戏感知）技术难度有多大？主播场景下的游戏事件识别准确率能达到什么水平？</li>
+          <li><span class="topic-q-icon">❓</span>ChatRadar（弹幕雷达）在千人同时弹幕的情况下，实际延迟能控制在多少秒内？</li>
+          <li><span class="topic-q-icon">❓</span>FlowAssist（节奏助手）的话题建议，有没有被主播实际验证过？还是基于假设？</li>
+          <li><span class="topic-q-icon">❓</span>LiveHUD在现有平台工具里有多少重复？我们的差异化在哪？</li>
+        </ul>
+        <div class="topic-decision"><strong>期望产出：</strong>5个功能的优先级排序，Phase 1 MVP 的最小功能集定义</div>
+      </div>
+    </div>
+
+    <!-- T3 -->
+    <div class="topic-card t-content card">
+      <div class="topic-head">
+        <div class="topic-num">T3</div>
+        <div class="topic-head-main">
+          <div class="topic-head-title">视频引擎的实现路径与技术可行性</div>
+          <div class="topic-head-sub">类型：技术评审 · 预计15分钟</div>
+        </div>
+        <span class="topic-owner">🎬 视频负责人主导</span>
+      </div>
+      <div class="topic-body">
+        <ul class="topic-questions">
+          <li><span class="topic-q-icon">❓</span>「下播10分钟出片」这个指标是否合理？10分钟包含哪些步骤，技术上卡点在哪里？</li>
+          <li><span class="topic-q-icon">❓</span>StyleAdapt（风格适配）在不同平台生成不同版本，现有技术能做到多大程度的自动化？</li>
+          <li><span class="topic-q-icon">❓</span>AutoPack里的封面生成，效果能达到主播自己设计的水平吗？有没有demo可以参考？</li>
+          <li><span class="topic-q-icon">❓</span>与游引力团队合作的接入方式是怎样的？有没有现成的API可以复用？</li>
+        </ul>
+        <div class="topic-decision"><strong>期望产出：</strong>视频引擎5个功能的技术可行性评分（高/中/低），重点难点标注</div>
+      </div>
+    </div>
+
+    <!-- T4 -->
+    <div class="topic-card t-content card">
+      <div class="topic-head">
+        <div class="topic-num">T4</div>
+        <div class="topic-head-main">
+          <div class="topic-head-title">主播实际工作流是否吻合？24小时场景验证</div>
+          <div class="topic-head-sub">类型：场景验证 · 预计10分钟</div>
+        </div>
+        <span class="topic-owner">🎮🎬 两位专家共同评审</span>
+      </div>
+      <div class="topic-body">
+        <ul class="topic-questions">
+          <li><span class="topic-q-icon">❓</span>提案中「主播小明的24小时」场景，哪些细节是真实的，哪些是我们想象的？</li>
+          <li><span class="topic-q-icon">❓</span>主播真的在意「数据早报」和「下播复盘」这类功能吗？还是他们只想要更多观众？</li>
+          <li><span class="topic-q-icon">❓</span>睡觉时AI代播（Phase 3）的场景——主播愿意吗？会担心「被发现是AI」吗？</li>
+        </ul>
+        <div class="topic-decision"><strong>期望产出：</strong>修正场景描述中的不实之处，补充1-2个更真实的典型场景</div>
+      </div>
+    </div>
+
+    <!-- T5 -->
+    <div class="topic-card t-plan card">
+      <div class="topic-head">
+        <div class="topic-num">T5</div>
+        <div class="topic-head-main">
+          <div class="topic-head-title">Phase 1 MVP 的范围与验证目标</div>
+          <div class="topic-head-sub">类型：计划讨论 · 预计10分钟</div>
+        </div>
+        <span class="topic-owner">👥 全员讨论</span>
+      </div>
+      <div class="topic-body">
+        <ul class="topic-questions">
+          <li><span class="topic-q-icon">❓</span>Phase 1 的3个月，直播引擎的核心功能集是什么？砍到最小可验证是哪几个？</li>
+          <li><span class="topic-q-icon">❓</span>「主播说『有这个我安心多了』」——这个验证目标太虚，如何量化？留存率？使用频次？</li>
+          <li><span class="topic-q-icon">❓</span>视频引擎MVP是否并行做，还是先验证直播线再开视频线？</li>
+        </ul>
+        <div class="topic-decision"><strong>期望产出：</strong>Phase 1 功能清单（砍后版）+ 可量化的验证目标</div>
+      </div>
+    </div>
+
+    <!-- T6 -->
+    <div class="topic-card t-resource card">
+      <div class="topic-head">
+        <div class="topic-num">T6</div>
+        <div class="topic-head-main">
+          <div class="topic-head-title">资源诉求的合理性评估</div>
+          <div class="topic-head-sub">类型：资源讨论 · 预计10分钟</div>
+        </div>
+        <span class="topic-owner">👥 全员讨论</span>
+      </div>
+      <div class="topic-body">
+        <ul class="topic-questions">
+          <li><span class="topic-q-icon">❓</span>「3-5位中腰部主播试点」——谁来找？有没有现成的主播资源？找到的可能性有多大？</li>
+          <li><span class="topic-q-icon">❓</span>「前端×1 + 后端×1 + 算法×1」——这个人力估算是否合理？有没有可以直接复用的现有能力？</li>
+          <li><span class="topic-q-icon">❓</span>混元多模态接入的流程是什么？谁负责对接？大概多久能接进来？</li>
+        </ul>
+        <div class="topic-decision"><strong>期望产出：</strong>修正资源诉求清单，明确每项资源的负责人和获取路径</div>
+      </div>
+    </div>
+
+    <!-- T7 -->
+    <div class="topic-card t-plan card">
+      <div class="topic-head">
+        <div class="topic-num">T7</div>
+        <div class="topic-head-main">
+          <div class="topic-head-title">提案材料的补充方向 & 分工</div>
+          <div class="topic-head-sub">类型：执行规划 · 预计10分钟</div>
+        </div>
+        <span class="topic-owner">🎯 PM主导</span>
+      </div>
+      <div class="topic-body">
+        <ul class="topic-questions">
+          <li><span class="topic-q-icon">❓</span>现有提案（PPT + 网站）还缺什么？需要补充竞品对比吗？需要加数据支撑吗？</li>
+          <li><span class="topic-q-icon">❓</span>提案对象是谁？老板/部门领导/外部合作团队？不同对象的材料侧重点不同。</li>
+          <li><span class="topic-q-icon">❓</span>提案时间节点是什么？倒推出材料定稿的deadline。</li>
+        </ul>
+        <div class="topic-decision"><strong>期望产出：</strong>提案定稿清单 + 每人负责模块 + deadline</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ══════════════════════════════════ -->
+  <!-- 6. 分工矩阵                        -->
+  <!-- ══════════════════════════════════ -->
+  <div class="section-heading" id="duty">
+    <div class="section-heading-num" style="background: var(--teal);">6</div>
+    <div>
+      <div class="section-heading-text">分工建议（草案）</div>
+      <div class="section-heading-desc">PM的初步分工方案，会议上确认后正式生效</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header">
+      <div class="card-header-icon">⚡</div>
+      <div class="card-header-main">
+        <div class="card-header-title">提案定稿前的分工建议</div>
+        <div class="card-header-sub">目标：一周内完成提案定稿，准备正式宣讲</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="duty-grid">
+
+        <!-- 直播专家 -->
+        <div class="duty-card live-expert">
+          <div class="duty-head live-expert">
+            <div class="duty-role">直播专家</div>
+            <div class="duty-name">专业内容顾问</div>
+          </div>
+          <div class="duty-body">
+            <div class="duty-phase">
+              <div class="duty-phase-label">本周任务</div>
+              <ul class="duty-task-list live-t">
+                <li>对直播引擎5个功能逐一写专业评审意见（可口头录音，实习生整理）</li>
+                <li>提供2-3个真实主播使用场景描述，替换提案中过于理想化的部分</li>
+                <li>给出Phase 1直播线的最小功能集建议</li>
+                <li>梳理可对接的主播试点资源名单（3-5人）</li>
+              </ul>
+            </div>
+            <div class="duty-deliverable">
+              <strong>📋 交付物</strong>
+              直播引擎专业评审文档（Markdown或口头录音均可）<br>
+              主播试点候选名单
+            </div>
+          </div>
+        </div>
+
+        <!-- 视频负责人 -->
+        <div class="duty-card video-lead">
+          <div class="duty-head video-lead">
+            <div class="duty-role">视频负责人</div>
+            <div class="duty-name">视频线技术评估</div>
+          </div>
+          <div class="duty-body">
+            <div class="duty-phase">
+              <div class="duty-phase-label">本周任务</div>
+              <ul class="duty-task-list video-t">
+                <li>对视频引擎5个功能进行技术可行性评分（高/中/低），注明难点</li>
+                <li>提供「下播10分钟出片」的技术实现方案（哪些步骤可自动化，哪些暂时不行）</li>
+                <li>明确游引力团队合作的接入可能性和时间预期</li>
+                <li>如有相关demo或参考案例，提供链接或截图</li>
+              </ul>
+            </div>
+            <div class="duty-deliverable">
+              <strong>📋 交付物</strong>
+              视频引擎技术评估表（Excel/文档均可）<br>
+              游引力合作可行性结论
+            </div>
+          </div>
+        </div>
+
+        <!-- 实习生 -->
+        <div class="duty-card intern">
+          <div class="duty-head intern">
+            <div class="duty-role">执行同学 · 实习生</div>
+            <div class="duty-name">暄雅 + 永涛</div>
+          </div>
+          <div class="duty-body">
+            <div class="duty-phase">
+              <div class="duty-phase-label">暄雅（内容方向）</div>
+              <ul class="duty-task-list intern-t">
+                <li>会议记录整理，会后24小时内输出会议纪要</li>
+                <li>根据专家意见，更新提案PPT（导入新内容，格式对齐）</li>
+                <li>竞品调研：市面上3-5个类似工具的功能对比表</li>
+              </ul>
+            </div>
+            <div class="duty-phase" style="margin-top: 10px;">
+              <div class="duty-phase-label">永涛（数据方向）</div>
+              <ul class="duty-task-list intern-t">
+                <li>整理主播调研问卷（基于T1-T4讨论结果设计）</li>
+                <li>搜集行业数据：主播每日工作时长、内容复用率等支撑数据</li>
+                <li>提案网站更新（配合PM修改内容后更新HTML）</li>
+              </ul>
+            </div>
+            <div class="duty-deliverable">
+              <strong>📋 交付物</strong>
+              会议纪要（24h内）<br>
+              竞品对比表 + 行业数据文档（3天内）<br>
+              主播调研问卷初稿（3天内）
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- PM 自己的分工 -->
+  <div class="card" style="border-color: rgba(91,79,207,0.25);">
+    <div class="card-header" style="background: var(--live-ultra); border-color: rgba(91,79,207,0.15);">
+      <div class="card-header-icon">🎯</div>
+      <div class="card-header-main">
+        <div class="card-header-title" style="color: var(--live);">PM（wickyli）自己负责</div>
+        <div class="card-header-sub">不能都甩出去，PM的核心职责</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+        <div>
+          <div style="font-size: 11px; font-weight: 700; color: var(--gray-500); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 8px;">本周完成</div>
+          <ul style="list-style: none; display: flex; flex-direction: column; gap: 6px;">
+            <li style="font-size: 13px; color: var(--gray-700); display: flex; gap: 8px;"><span style="color: var(--live); flex-shrink: 0;">✓</span>整合专家意见，更新iWiki文档（主文档+3个子页面）</li>
+            <li style="font-size: 13px; color: var(--gray-700); display: flex; gap: 8px;"><span style="color: var(--live); flex-shrink: 0;">✓</span>根据T5讨论结果，重写Phase 1功能范围和验证目标</li>
+            <li style="font-size: 13px; color: var(--gray-700); display: flex; gap: 8px;"><span style="color: var(--live); flex-shrink: 0;">✓</span>修正资源诉求清单（加入各项负责人和时间线）</li>
+            <li style="font-size: 13px; color: var(--gray-700); display: flex; gap: 8px;"><span style="color: var(--live); flex-shrink: 0;">✓</span>协调主播试点资源，发出初步邀请</li>
+          </ul>
+        </div>
+        <div>
+          <div style="font-size: 11px; font-weight: 700; color: var(--gray-500); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 8px;">同步推进</div>
+          <ul style="list-style: none; display: flex; flex-direction: column; gap: 6px;">
+            <li style="font-size: 13px; color: var(--gray-700); display: flex; gap: 8px;"><span style="color: var(--live); flex-shrink: 0;">✓</span>确定正式提案的时间节点和受众</li>
+            <li style="font-size: 13px; color: var(--gray-700); display: flex; gap: 8px;"><span style="color: var(--live); flex-shrink: 0;">✓</span>联系混元多模态团队，确认接入流程</li>
+            <li style="font-size: 13px; color: var(--gray-700); display: flex; gap: 8px;"><span style="color: var(--live); flex-shrink: 0;">✓</span>整理本次会议结论，更新提案版本号</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════ -->
+  <!-- 7. 行动项清单（会后填写）          -->
+  <!-- ══════════════════════════════════ -->
+  <div class="section-heading" id="actions">
+    <div class="section-heading-num" style="background: var(--amber);">7</div>
+    <div>
+      <div class="section-heading-text">行动项清单</div>
+      <div class="section-heading-desc">会议结束前必须确认，实习生在会上同步录入</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-body" style="padding: 0;">
+      <table class="action-table">
+        <thead>
+          <tr>
+            <th style="width: 44px;">优先</th>
+            <th style="width: 240px;">行动项</th>
+            <th style="width: 100px;">负责人</th>
+            <th style="width: 90px;">Deadline</th>
+            <th>备注/产出物</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="p-badge p0">P0</span></td>
+            <td>会议纪要整理（含所有决策项）</td>
+            <td><span class="owner-tag">暄雅</span></td>
+            <td><span class="ddl-tag">会后24h</span></td>
+            <td style="font-size: 12px; color: var(--gray-500);">iWiki文档 + 企微发送</td>
+          </tr>
+          <tr>
+            <td><span class="p-badge p0">P0</span></td>
+            <td>直播引擎专业评审意见输出</td>
+            <td><span class="owner-tag">直播专家</span></td>
+            <td><span class="ddl-tag">3天内</span></td>
+            <td style="font-size: 12px; color: var(--gray-500);">文档或录音均可</td>
+          </tr>
+          <tr>
+            <td><span class="p-badge p0">P0</span></td>
+            <td>视频引擎技术可行性评估表</td>
+            <td><span class="owner-tag">视频负责人</span></td>
+            <td><span class="ddl-tag">3天内</span></td>
+            <td style="font-size: 12px; color: var(--gray-500);">高/中/低评分 + 难点说明</td>
+          </tr>
+          <tr>
+            <td><span class="p-badge p1">P1</span></td>
+            <td>Phase 1 功能清单（会上讨论结果）</td>
+            <td><span class="owner-tag">PM</span></td>
+            <td><span class="ddl-tag">3天内</span></td>
+            <td style="font-size: 12px; color: var(--gray-500);">更新iWiki + 更新PPT</td>
+          </tr>
+          <tr>
+            <td><span class="p-badge p1">P1</span></td>
+            <td>主播试点候选名单</td>
+            <td><span class="owner-tag">直播专家</span></td>
+            <td><span class="ddl-tag">3天内</span></td>
+            <td style="font-size: 12px; color: var(--gray-500);">3-5人，中腰部游戏主播</td>
+          </tr>
+          <tr>
+            <td><span class="p-badge p1">P1</span></td>
+            <td>竞品调研报告</td>
+            <td><span class="owner-tag">暄雅</span></td>
+            <td><span class="ddl-tag">3天内</span></td>
+            <td style="font-size: 12px; color: var(--gray-500);">3-5个竞品功能对比表</td>
+          </tr>
+          <tr>
+            <td><span class="p-badge p1">P1</span></td>
+            <td>行业数据支撑材料</td>
+            <td><span class="owner-tag">永涛</span></td>
+            <td><span class="ddl-tag">3天内</span></td>
+            <td style="font-size: 12px; color: var(--gray-500);">主播工作时长/内容复用率等</td>
+          </tr>
+          <tr>
+            <td><span class="p-badge p1">P1</span></td>
+            <td>主播调研问卷初稿</td>
+            <td><span class="owner-tag">永涛</span></td>
+            <td><span class="ddl-tag">3天内</span></td>
+            <td style="font-size: 12px; color: var(--gray-500);">基于T1-T4结论设计</td>
+          </tr>
+          <tr>
+            <td><span class="p-badge p2">P2</span></td>
+            <td>游引力团队合作可行性确认</td>
+            <td><span class="owner-tag">视频负责人</span></td>
+            <td><span class="ddl-tag">本周内</span></td>
+            <td style="font-size: 12px; color: var(--gray-500);">明确接入可能性和时间预期</td>
+          </tr>
+          <tr>
+            <td><span class="p-badge p2">P2</span></td>
+            <td>混元多模态接入流程确认</td>
+            <td><span class="owner-tag">PM</span></td>
+            <td><span class="ddl-tag">本周内</span></td>
+            <td style="font-size: 12px; color: var(--gray-500);">联系IEG AI中台</td>
+          </tr>
+          <tr>
+            <td><span class="p-badge p2">P2</span></td>
+            <td>提案PPT定稿（v4）</td>
+            <td><span class="owner-tag">暄雅+PM</span></td>
+            <td><span class="ddl-tag">下周一</span></td>
+            <td style="font-size: 12px; color: var(--gray-500);">整合所有意见后的最终版本</td>
+          </tr>
+          <tr style="background: var(--gray-100);">
+            <td colspan="5" style="font-size: 12px; color: var(--gray-500); font-style: italic; padding: 10px 14px;">
+              ⬆️ 以上为预设行动项，会议中根据讨论结果补充/修改
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════ -->
+  <!-- 8. 会前须知                        -->
+  <!-- ══════════════════════════════════ -->
+  <div class="section-heading" id="prereq">
+    <div class="section-heading-num" style="background: var(--gray-500);">8</div>
+    <div>
+      <div class="section-heading-text">会前须知</div>
+      <div class="section-heading-desc">各角色进会前需要做的准备</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-body">
+      <div class="prereq-grid">
+        <div class="prereq-block" style="background: var(--teal-ultra); border-color: rgba(10,126,106,0.2);">
+          <div class="prereq-block-title" style="color: var(--teal);">🎮 直播专家 — 会前准备</div>
+          <ul class="prereq-list">
+            <li><span class="tag" style="background: var(--teal-ultra); color: var(--teal); border: 1px solid rgba(10,126,106,0.2);">必读</span>通读提案网站或PPT，了解产品整体框架</li>
+            <li><span class="tag" style="background: var(--teal-ultra); color: var(--teal); border: 1px solid rgba(10,126,106,0.2);">必备</span>准备3-5个你认为「不对」或「不够」的具体意见</li>
+            <li><span class="tag" style="background: var(--amber-ultra); color: var(--amber); border: 1px solid rgba(183,119,13,0.2);">最好有</span>手边有1-2个真实主播案例，可以现场举例</li>
+            <li><span class="tag" style="background: var(--gray-100); color: var(--gray-500); border: 1px solid var(--border);">可选</span>如有接触过的主播资源，带一份粗略名单</li>
+          </ul>
+        </div>
+        <div class="prereq-block" style="background: var(--video-ultra); border-color: rgba(212,85,12,0.2);">
+          <div class="prereq-block-title" style="color: var(--video);">🎬 视频负责人 — 会前准备</div>
+          <ul class="prereq-list">
+            <li><span class="tag" style="background: var(--red-ultra); color: var(--red); border: 1px solid rgba(192,57,43,0.2);">必读</span>重点阅读「视频引擎」板块（提案网站第2、3部分）</li>
+            <li><span class="tag" style="background: var(--red-ultra); color: var(--red); border: 1px solid rgba(192,57,43,0.2);">必备</span>对视频引擎每个功能有初步的可行性判断</li>
+            <li><span class="tag" style="background: var(--amber-ultra); color: var(--amber); border: 1px solid rgba(183,119,13,0.2);">最好有</span>了解游引力团队现有视频处理能力的大致情况</li>
+            <li><span class="tag" style="background: var(--gray-100); color: var(--gray-500); border: 1px solid var(--border);">可选</span>如有相关demo或参考案例，提前准备链接</li>
+          </ul>
+        </div>
+        <div class="prereq-block" style="background: var(--amber-ultra); border-color: rgba(183,119,13,0.2);">
+          <div class="prereq-block-title" style="color: var(--amber);">📝 实习生（暄雅/永涛）— 会前准备</div>
+          <ul class="prereq-list">
+            <li><span class="tag" style="background: var(--red-ultra); color: var(--red); border: 1px solid rgba(192,57,43,0.2);">必做</span>准备会议记录模板，实时整理讨论结论和行动项</li>
+            <li><span class="tag" style="background: var(--red-ultra); color: var(--red); border: 1px solid rgba(192,57,43,0.2);">必做</span>通读本会议材料，理解提案背景</li>
+            <li><span class="tag" style="background: var(--amber-ultra); color: var(--amber); border: 1px solid rgba(183,119,13,0.2);">建议</span>看一下iWiki上的完整方案文档，有问题会议上可以问</li>
+          </ul>
+        </div>
+        <div class="prereq-block" style="background: var(--live-ultra); border-color: rgba(91,79,207,0.2);">
+          <div class="prereq-block-title" style="color: var(--live);">🎯 PM（wickyli）— 会前准备</div>
+          <ul class="prereq-list">
+            <li><span class="tag" style="background: var(--red-ultra); color: var(--red); border: 1px solid rgba(192,57,43,0.2);">必做</span>发送本会议材料给所有参会人，要求会前阅读</li>
+            <li><span class="tag" style="background: var(--red-ultra); color: var(--red); border: 1px solid rgba(192,57,43,0.2);">必做</span>启动提案网站和PPT的预览链接，确保会上能访问</li>
+            <li><span class="tag" style="background: var(--amber-ultra); color: var(--amber); border: 1px solid rgba(183,119,13,0.2);">建议</span>提前与两位专家一对一同步，了解他们的初步态度</li>
+            <li><span class="tag" style="background: var(--gray-100); color: var(--gray-500); border: 1px solid var(--border);">可选</span>准备1-2个开放性问题，用于带动会议氛围</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 底部备注 -->
+  <div class="note-box">
+    <strong>💡 关于这次会议的心态：</strong>
+    我们现在做的是内部提案，目的是争取资源，不是公开发布。所以专家挑毛病越多越好，现在发现问题比提案被否定后发现要好得多。
+    希望大家<strong>直说，不用顾忌</strong>，有冲突意见当场讨论，这是会议存在的价值。
+  </div>
+
+  <div style="margin-top: 32px; text-align: center; font-size: 12px; color: var(--gray-300);">
+    内容助手 · 提案讨论会议材料 · wickyli · 2026.04 · IEG游戏直播生态
+  </div>
+
+</div>
+
+<script>
+  // 平滑滚动
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      const t = document.querySelector(a.getAttribute('href'));
+      if (t) t.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+</script>
+</body>
+</html>
